@@ -12,4 +12,9 @@ class ExampleEntity implements EntityInterface
 {
 	use IdTrait;
 	use TimestampsTrait;
+
+	public function __construct (?int $id = null)
+	{
+		$this->id = $id;
+	}
 }

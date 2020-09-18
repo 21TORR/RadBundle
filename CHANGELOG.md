@@ -13,3 +13,4 @@
 *   (feature) Add `BaseController`.
 *   (feature) Add `Model` + `ModelInterface`.
 *   (feature) Add `CommandHelper`.
+*   (feature) Add `Routable`.
