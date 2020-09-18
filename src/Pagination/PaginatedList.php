@@ -44,7 +44,7 @@ final class PaginatedList
 	 */
 	public static function fromArray (array $list)
 	{
-		$total =  \count($list);
+		$total = \count($list);
 		$perPage = \max(1, $total);
 		return new self($list, new Pagination(1, $perPage, $total));
 	}

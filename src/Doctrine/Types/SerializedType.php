@@ -34,8 +34,9 @@ class SerializedType extends Type
 	/**
 	 * @inheritDoc
 	 *
-	 * @return mixed
 	 * @throws ConversionException
+	 *
+	 * @return mixed
 	 */
 	public function convertToPHPValue ($value, AbstractPlatform $platform)
 	{

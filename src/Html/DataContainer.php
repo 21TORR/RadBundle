@@ -4,7 +4,6 @@ namespace Torr\Rad\Html;
 
 use Symfony\Component\HttpFoundation\Response;
 
-
 class DataContainer
 {
 	/**
