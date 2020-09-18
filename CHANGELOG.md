@@ -5,3 +5,4 @@
 *   (feature) Add base entity helpers:
     *    `EntityInterface`, `SortableEntityInterface`
     *   `IdTrait`, `SortOrderTrait`, `TimestampsTrait`
+*   (feature) Add `DataContainer`.
