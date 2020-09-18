@@ -6,3 +6,4 @@
     *    `EntityInterface`, `SortableEntityInterface`
     *   `IdTrait`, `SortOrderTrait`, `TimestampsTrait`
 *   (feature) Add `DataContainer`.
+*   (feature) Add Twig function: `data_container`
