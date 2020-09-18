@@ -129,6 +129,7 @@ final class Routable
 		return $value->generate($generator);
 	}
 
+
 	/**
 	 * Returns whether the given value is valid for URL generation in {@see self::generateUrl()}.
 	 */
@@ -138,6 +139,7 @@ final class Routable
 			? (\is_string($value) || $value instanceof self)
 			: !$isRequired;
 	}
+
 
 	/**
 	 * Ensures that the given value is a valid routable target, that can be handled in
