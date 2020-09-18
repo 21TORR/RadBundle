@@ -12,3 +12,4 @@
 *   (feature) Add `FormErrorNormalizer`.
 *   (feature) Add `BaseController`.
 *   (feature) Add `Model` + `ModelInterface`.
+*   (feature) Add `CommandHelper`.
