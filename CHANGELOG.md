@@ -10,4 +10,5 @@
 *   (feature) Add Twig filter: `appendToArrayKey`
 *   (feature) Add pagination related classes + helpers.
 *   (feature) Add `FormErrorNormalizer`.
+*   (feature) Add `BaseController`.
 *   (feature) Add `Model` + `ModelInterface`.
