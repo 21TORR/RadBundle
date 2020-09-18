@@ -43,7 +43,7 @@ final class PaginatedListTest extends TestCase
 	public function testGeneratorList () : void
 	{
 		$pagination = new Pagination(1, 10, 5);
-		$list = function () : iterable
+		$list = static function () : iterable
 		{
 			yield 1;
 			yield 2;
@@ -56,7 +56,7 @@ final class PaginatedListTest extends TestCase
 		self::assertSame($iterable, $paginatedList->getList());
 	}
 
-	
+
 	/**
 	 */
 	public function provideFromArray ()
