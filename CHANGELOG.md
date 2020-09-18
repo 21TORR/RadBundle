@@ -8,4 +8,5 @@
 *   (feature) Add `DataContainer`.
 *   (feature) Add Twig function: `data_container`
 *   (feature) Add Twig filter: `appendToArrayKey`
+*   (feature) Add pagination related classes + helpers.
 *   (feature) Add `Model` + `ModelInterface`.
