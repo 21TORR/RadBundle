@@ -16,3 +16,4 @@
 *   (feature) Add `Routable`.
 *   (feature) Add sortable related classes.
 *   (feature) Add `StatsLog`.
+*   (feature) Add `SimpleEntitySearchHandler`.
