@@ -14,22 +14,32 @@
 		"php": "^7.4",
 		"ext-json": "*",
 		"21torr/bundle-helpers": "^2.0",
-		"doctrine/dbal": "^2.10",
-		"doctrine/orm": "^2.7",
 		"psr/log": "^1.1",
 		"symfony/dependency-injection": "^5.1",
-		"symfony/form": "^5.1",
 		"symfony/framework-bundle": "^5.1",
 		"symfony/http-foundation": "^5.1",
-		"symfony/http-kernel": "^5.1",
-		"symfony/routing": "^5.1",
-		"symfony/translation": "^5.1",
-		"twig/twig": "^3.0"
+		"symfony/http-kernel": "^5.1"
 	},
 	"require-dev": {
 		"bamarni/composer-bin-plugin": "^1.4",
+		"doctrine/dbal": "^2.12",
+		"doctrine/orm": "^2.7",
 		"roave/security-advisories": "dev-master",
-		"symfony/phpunit-bridge": "^5.1"
+		"symfony/console": "^5.1",
+		"symfony/form": "^5.1",
+		"symfony/phpunit-bridge": "^5.1",
+		"symfony/routing": "^5.1",
+		"symfony/translation": "^5.1",
+		"twig/twig": "^3.1"
+	},
+	"suggest": {
+		"doctrine/dbal": "To add the SerializedType",
+		"doctrine/orm": "To use the entities",
+		"symfony/console": "To use TorrStyle",
+		"symfony/form": "To use the FormErrorNormalizer",
+		"symfony/routing": "To use the Routable",
+		"symfony/translation": "To properly use the form error normalizer",
+		"twig/twig": "To use the twig functions"
 	},
 	"config": {
 		"sort-packages": true

@@ -14,12 +14,15 @@ class TorrRadBundleExtension extends BundleExtension implements PrependExtension
 	 */
 	public function prepend (ContainerBuilder $container) : void
 	{
-		$container->prependExtensionConfig("doctrine", [
-			"dbal" => [
-				"types" => [
-					SerializedType::NAME => SerializedType::class,
+		if ($container->hasExtension("doctrine"))
+		{
+			$container->prependExtensionConfig("doctrine", [
+				"dbal" => [
+					"types" => [
+						SerializedType::NAME => SerializedType::class,
+					],
 				],
-			],
-		]);
+			]);
+		}
 	}
 }

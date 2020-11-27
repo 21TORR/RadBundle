@@ -1,3 +1,10 @@
+1.1.0
+=====
+
+*   (improvement) Make nearly all dependencies optional.
+*   (feature) Add `TorrCliStyle`.
+
+
 1.0.0
 =====
 
