@@ -6,9 +6,27 @@ jobs:
     build-test:
         runs-on: ubuntu-latest
 
+        strategy:
+            matrix:
+                php: ['7.4', '8.0']
+
         steps:
             -   name: Checkout Code
                 uses: actions/checkout@v2
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    coverage: "none"
+                    ini-values: "memory_limit=-1"
+                    php-version: "${{ matrix.php }}"
+                    tools: pecl
+
+            -   name: Display versions
+                run: |
+                    php --version
+                    php -r 'foreach (get_loaded_extensions() as $extension) echo $extension . " " . phpversion($extension) . PHP_EOL;'
+                    php -i
 
             -   name: Install Composer
                 uses: php-actions/composer@v1
@@ -20,6 +38,11 @@ jobs:
 
             -   name: PHP CS Fixer
                 run: "./vendor/bin/php-cs-fixer fix --diff --config vendor-bin/test/vendor/21torr/php-cs/.php_cs.dist --dry-run --no-interaction"
+                env:
+                    PHP_CS_FIXER_IGNORE_ENV: 1
 
             -   name: PHPStan
                 run: "./vendor/bin/phpstan analyze -c vendor-bin/test/vendor/21torr/php-cs/phpstan/lib.neon ."
+
+            -   name: PHPUnit
+                run: "./vendor/bin/simple-phpunit --testdox"
