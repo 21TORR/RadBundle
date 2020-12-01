@@ -1,3 +1,11 @@
+1.1.1
+=====
+
+*   (improvement) Allow PHP 8.0
+*   (improvement) Require Symfony 5.2
+*   (bug) Run PHPUnit tests in the CI
+
+
 1.1.0
 =====
 
