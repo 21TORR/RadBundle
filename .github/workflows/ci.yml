@@ -2,6 +2,9 @@ name: CI
 
 on: [ push ]
 
+env:
+    SYMFONY_PHPUNIT_DIR: "$HOME/symfony-bridge/.phpunit"
+
 jobs:
     build-test:
         runs-on: ubuntu-latest
@@ -20,7 +23,10 @@ jobs:
                     coverage: "none"
                     ini-values: "memory_limit=-1"
                     php-version: "${{ matrix.php }}"
-                    tools: pecl
+                    tools: "pecl, cs2pr"
+
+            -   name: Configure matchers
+                uses: mheap/phpunit-matcher-action@master
 
             -   name: Display versions
                 run: |
@@ -37,14 +43,13 @@ jobs:
                     args: "--indent-style tab --indent-size 1 --dry-run --ansi"
 
             -   name: PHP CS Fixer
-                run: "./vendor/bin/php-cs-fixer fix --diff --config vendor-bin/test/vendor/21torr/php-cs/.php_cs.dist --dry-run --no-interaction --ansi"
+                run: "./vendor/bin/php-cs-fixer fix --diff --config vendor-bin/test/vendor/21torr/php-cs/.php_cs.dist --dry-run --no-interaction --ansi --format=checkstyle | cs2pr"
                 env:
                     PHP_CS_FIXER_IGNORE_ENV: 1
 
             -   name: PHPStan
-                run: "./vendor/bin/phpstan analyze -c vendor-bin/test/vendor/21torr/php-cs/phpstan/lib.neon . --ansi"
+                run: "./vendor/bin/phpstan analyze -c vendor-bin/test/vendor/21torr/php-cs/phpstan/lib.neon . --ansi --error-format=checkstyle | cs2pr"
 
             -   name: PHPUnit
-                run: "./vendor/bin/simple-phpunit --testdox"
-                env:
-                    SYMFONY_PHPUNIT_DIR: ".temp/.phpunit"
+                # --teamcity output used by `mheap/phpunit-matcher-action`
+                run: "./vendor/bin/simple-phpunit --teamcity"
