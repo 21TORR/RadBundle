@@ -132,6 +132,8 @@ final class Routable
 
 	/**
 	 * Returns whether the given value is valid for URL generation in {@see self::generateUrl()}.
+	 *
+	 * @param mixed $value
 	 */
 	public static function isValidValue ($value, bool $isRequired = self::REQUIRED) : bool
 	{
@@ -144,6 +146,8 @@ final class Routable
 	/**
 	 * Ensures that the given value is a valid routable target, that can be handled in
 	 * {@see self::generateUrl()}.
+	 *
+	 * @param mixed $value
 	 *
 	 * @throws InvalidRoutableException
 	 */

@@ -2,6 +2,7 @@
 
 namespace Torr\Rad\Form;
 
+use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -31,6 +32,7 @@ final class FormErrorNormalizer
 		{
 			$key = \ltrim("{$prefix}{$child->getName()}");
 
+			/** @var FormError $childError */
 			foreach ($child->getErrors() as $childError)
 			{
 				$errors[$key][] = $this->translator->trans($childError->getMessage(), [], $translationDomain);
@@ -56,6 +58,7 @@ final class FormErrorNormalizer
 		$this->normalizeNested($errors, $form, $prefix, $translationDomain);
 
 		// add global errors (the errors on the root form, or that bubbled up)
+		/** @var FormError $error */
 		foreach ($form->getErrors() as $error)
 		{
 			$errors[self::GLOBAL_KEY][] = $this->translator->trans($error->getMessage(), [], $translationDomain);
