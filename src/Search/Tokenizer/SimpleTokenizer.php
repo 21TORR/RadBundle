@@ -20,7 +20,7 @@ final class SimpleTokenizer
 	/**
 	 * Transforms the given input for usage in a query
 	 */
-	public function transformInput (?string $input, bool $mode = self::MODE_PREFIX)
+	public function transformInput (?string $input, bool $mode = self::MODE_PREFIX) : string
 	{
 		$input = \trim((string) $input);
 
@@ -31,6 +31,8 @@ final class SimpleTokenizer
 
 		$words = \preg_split('~\\s+~', $input);
 		$tokens = [];
+
+		\assert(\is_array($words));
 
 		foreach ($words as $word)
 		{

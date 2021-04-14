@@ -118,7 +118,7 @@ final class SortableHandler
 
 		foreach ($excludedEntities as $entity)
 		{
-			$excludedIds[$entity->getId()] = true;
+			$excludedIds[(string) $entity->getId()] = true;
 		}
 
 		$sortOrder = 0;
@@ -128,7 +128,7 @@ final class SortableHandler
 			/** @var SortableEntityInterface $entity */
 			$entity = $row[0];
 
-			if (\array_key_exists($entity->getId(), $excludedIds))
+			if (\array_key_exists((string) $entity->getId(), $excludedIds))
 			{
 				continue;
 			}

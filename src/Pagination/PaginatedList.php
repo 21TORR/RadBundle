@@ -42,7 +42,7 @@ final class PaginatedList
 	/**
 	 * Creates a new paginated list that displays the given items on a single page.
 	 */
-	public static function fromArray (array $list)
+	public static function fromArray (array $list) : self
 	{
 		$total = \count($list);
 		$perPage = \max(1, $total);
