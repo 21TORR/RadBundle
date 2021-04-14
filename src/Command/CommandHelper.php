@@ -2,37 +2,20 @@
 
 namespace Torr\Rad\Command;
 
-use Symfony\Component\HttpKernel\Profiler\Profiler;
+use Torr\Cli\Command\CommandHelper as CliCommandHelper;
 
 /**
  * Helper class that eases implementation when building commands.
  */
-final class CommandHelper
+\trigger_deprecation(
+	"21torr/rad",
+	"1.1.2",
+	"The CommandHelper from the rad bundle is deprecated. Use CommandHelper from `21torr/cli` directly instead."
+);
+
+/**
+ * @deprecated UseCommandHelper from `21torr/cli` directly instead.
+ */
+final class CommandHelper extends CliCommandHelper
 {
-	private ?Profiler $profiler;
-
-
-	/**
-	 */
-	public function __construct (?Profiler $profiler)
-	{
-		$this->profiler = $profiler;
-	}
-
-
-	/**
-	 *
-	 */
-	public function startLongRunningCommand () : void
-	{
-		// disable symfony profiler
-		if (null !== $this->profiler)
-		{
-			$this->profiler->disable();
-		}
-
-		// increase PHP limits
-		\set_time_limit(0);
-		\ini_set("memory_limit", "-1");
-	}
 }
