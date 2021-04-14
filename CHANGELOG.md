@@ -1,7 +1,7 @@
 1.1.2
 =====
 
-*   (deprecate) Deprecated the CLI helpers. Use `21torr/cli` instead.
+*   (deprecation) Deprecated the CLI helpers. Use `21torr/cli` instead.
 
 
 1.1.1
