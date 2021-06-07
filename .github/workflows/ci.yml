@@ -23,7 +23,7 @@ jobs:
                     coverage: "none"
                     ini-values: "memory_limit=-1"
                     php-version: "${{ matrix.php }}"
-                    tools: "composer, composer-normalize, pecl, cs2pr"
+                    tools: "composer, composer-normalize, cs2pr"
 
             -   name: Configure matchers
                 uses: mheap/phpunit-matcher-action@master
