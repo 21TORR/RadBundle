@@ -1,3 +1,9 @@
+1.1.3
+=====
+
+*   (bug) Remove the `SerializedType`. Unused yet, and doesn't allow installation without doctrine.
+
+
 1.1.2
 =====
 

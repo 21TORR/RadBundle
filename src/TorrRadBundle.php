@@ -4,7 +4,7 @@ namespace Torr\Rad;
 
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Torr\Rad\DependencyInjection\TorrRadBundleExtension;
+use Torr\BundleHelpers\Bundle\BundleExtension;
 
 class TorrRadBundle extends Bundle
 {
@@ -13,7 +13,7 @@ class TorrRadBundle extends Bundle
 	 */
 	public function getContainerExtension () : ExtensionInterface
 	{
-		return new TorrRadBundleExtension($this);
+		return new BundleExtension($this);
 	}
 
 	/**
