@@ -30,7 +30,7 @@ final class SimpleEntitySearchHandler
 		QueryBuilder $queryBuilder,
 		?string $input,
 		array $fieldsToSearch,
-		bool $mode = SimpleTokenizer::MODE_PREFIX
+		bool $mode = SimpleTokenizer::MODE_PREFIX,
 	) : QueryBuilder
 	{
 		$query = $this->tokenizer->transformInput($input, $mode);
@@ -45,7 +45,7 @@ final class SimpleEntitySearchHandler
 		foreach ($fieldsToSearch as $field)
 		{
 			$constraint->add(
-				new Comparison($field, "LIKE", ":__searchQueryTerm")
+				new Comparison($field, "LIKE", ":__searchQueryTerm"),
 			);
 		}
 

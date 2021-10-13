@@ -65,7 +65,7 @@ abstract class BaseController extends AbstractController
 			{
 				throw new InvalidJsonRequestException(
 					\sprintf("Invalid top level type in JSON payload. Must be array, is %s", \gettype($data)),
-					400
+					400,
 				);
 			}
 
@@ -76,7 +76,7 @@ abstract class BaseController extends AbstractController
 			throw new InvalidJsonRequestException(
 				\sprintf("Parsing JSON payload failed: %s", $exception->getMessage()),
 				400,
-				$exception
+				$exception,
 			);
 		}
 	}

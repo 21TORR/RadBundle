@@ -22,8 +22,8 @@ class DataContainer
 			\htmlspecialchars($class, \ENT_QUOTES),
 			\htmlspecialchars(
 				\json_encode($data, \JSON_THROW_ON_ERROR),
-				\ENT_NOQUOTES
-			)
+				\ENT_NOQUOTES,
+			),
 		);
 	}
 

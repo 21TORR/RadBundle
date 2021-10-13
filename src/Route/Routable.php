@@ -27,7 +27,7 @@ final class Routable
 	public function __construct (
 		string $route,
 		array $parameters = [],
-		int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH
+		int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH,
 	)
 	{
 		$this->route = $route;
@@ -95,7 +95,7 @@ final class Routable
 		return $generator->generate(
 			$this->route,
 			$this->parameters,
-			$this->referenceType
+			$this->referenceType,
 		);
 	}
 
@@ -159,7 +159,7 @@ final class Routable
 				$value,
 				$isRequired
 					? \sprintf("string or %s", self::class)
-					: \sprintf("string, %s or null", self::class)
+					: \sprintf("string, %s or null", self::class),
 			);
 		}
 	}
