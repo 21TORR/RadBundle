@@ -10,7 +10,7 @@ use Torr\Cli\Command\CommandHelper as CliCommandHelper;
 \trigger_deprecation(
 	"21torr/rad",
 	"1.1.2",
-	"The CommandHelper from the rad bundle is deprecated. Use CommandHelper from `21torr/cli` directly instead."
+	"The CommandHelper from the rad bundle is deprecated. Use CommandHelper from `21torr/cli` directly instead.",
 );
 
 /**

@@ -154,7 +154,7 @@ final class StatsLog implements StatsLogInterface
 				$row[0] = "<fg=yellow>{$row[0]}</>";
 				return $row;
 			},
-			$this->prepareTableOutput()
+			$this->prepareTableOutput(),
 		);
 
 		$io->table(["Label", "×", "Description"], $rows);

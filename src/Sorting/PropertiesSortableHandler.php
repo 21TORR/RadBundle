@@ -38,7 +38,7 @@ final class PropertiesSortableHandler
 	public function setNextSortOrder (SortableEntityInterface $entity) : void
 	{
 		$entity->setSortOrder(
-			$this->sortable->getNextSortOrder($this->generateWhere($entity))
+			$this->sortable->getNextSortOrder($this->generateWhere($entity)),
 		);
 	}
 

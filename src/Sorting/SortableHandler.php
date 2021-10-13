@@ -51,7 +51,7 @@ final class SortableHandler
 	public function sortBefore (
 		SortableEntityInterface $entity,
 		?SortableEntityInterface $before,
-		array $where = []
+		array $where = [],
 	) : bool
 	{
 		if ($entity === $before)
@@ -63,15 +63,13 @@ final class SortableHandler
 			->select("entity")
 			->addOrderBy("entity.sortOrder", "asc")
 			->getQuery()
-			->iterate();
+			->toIterable();
 
 		$sortOrder = 0;
 
-		foreach ($entities as $row)
+		/** @var SortableEntityInterface $existing */
+		foreach ($entities as $existing)
 		{
-			/** @var SortableEntityInterface $existing */
-			$existing = $row[0];
-
 			// the entity itself should be skipped (if it already exists),
 			// as both cases will be handled below.
 			if ($existing === $entity)
@@ -112,7 +110,7 @@ final class SortableHandler
 			->select("entity")
 			->addOrderBy("entity.sortOrder", "asc")
 			->getQuery()
-			->iterate();
+			->toIterable();
 
 		$excludedIds = [];
 
@@ -123,11 +121,9 @@ final class SortableHandler
 
 		$sortOrder = 0;
 
-		foreach ($entities as $row)
+		/** @var SortableEntityInterface $entity */
+		foreach ($entities as $entity)
 		{
-			/** @var SortableEntityInterface $entity */
-			$entity = $row[0];
-
 			if (\array_key_exists((string) $entity->getId(), $excludedIds))
 			{
 				continue;
