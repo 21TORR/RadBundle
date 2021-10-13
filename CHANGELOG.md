@@ -2,6 +2,7 @@
 =====
 
 *   (improvement) Allow newer versions of `psr/log`.
+*   (improvement) Only allow PHP 8+
 
 
 1.1.3
