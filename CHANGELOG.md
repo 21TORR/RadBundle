@@ -1,3 +1,9 @@
+1.1.4
+=====
+
+*   (improvement) Allow newer versions of `psr/log`.
+
+
 1.1.3
 =====
 

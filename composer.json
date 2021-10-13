@@ -15,7 +15,7 @@
 		"ext-json": "*",
 		"21torr/bundle-helpers": "^2.0",
 		"21torr/cli": "^1.0.1",
-		"psr/log": "^1.1",
+		"psr/log": "^1.1 || ^2.0 || ^3.0",
 		"symfony/dependency-injection": "^5.2",
 		"symfony/deprecation-contracts": "^2.2",
 		"symfony/framework-bundle": "^5.2",
