@@ -1,3 +1,9 @@
+1.1.5
+=====
+
+*   (bug) Fix issue with `symfony/translator` being an optional dependency.
+
+
 1.1.4
 =====
 

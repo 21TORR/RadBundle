@@ -5,6 +5,7 @@ namespace Torr\Rad\Form;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Torr\Rad\Exception\MissingOptionalDependencyException;
 
 /**
  * Class that normalizes form errors to a nested array containing the messages.
@@ -12,12 +13,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class FormErrorNormalizer
 {
 	private const GLOBAL_KEY = "__global";
-	private TranslatorInterface $translator;
+	private ?TranslatorInterface $translator;
 
 
 	/**
 	 */
-	public function __construct (TranslatorInterface $translator)
+	public function __construct (?TranslatorInterface $translator)
 	{
 		$this->translator = $translator;
 	}
@@ -28,6 +29,11 @@ final class FormErrorNormalizer
 	 */
 	private function normalizeNested (array &$errors, FormInterface $parent, string $prefix, string $translationDomain) : void
 	{
+		if (null === $this->translator)
+		{
+			throw new MissingOptionalDependencyException("symfony/translator");
+		}
+
 		foreach ($parent->all() as $child)
 		{
 			$key = \ltrim("{$prefix}{$child->getName()}");
@@ -50,6 +56,11 @@ final class FormErrorNormalizer
 	 */
 	public function normalize (FormInterface $form, string $translationDomain = "validators") : array
 	{
+		if (null === $this->translator)
+		{
+			throw new MissingOptionalDependencyException("symfony/translator");
+		}
+
 		$errors = [];
 		$formName = $form->getName();
 		$prefix = !empty($formName) ? "{$formName}_" : "";
