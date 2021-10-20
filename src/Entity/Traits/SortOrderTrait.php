@@ -13,6 +13,7 @@ trait SortOrderTrait
 	/**
 	 * @ORM\Column(name="sort_order", type="integer")
 	 */
+	#[ORM\Column(name: "sort_order", type: "integer")]
 	private ?int $sortOrder = null;
 
 
