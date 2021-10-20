@@ -1,3 +1,9 @@
+1.1.6
+=====
+
+*   (improvement) Add attribute support on entity traits
+
+
 1.1.5
 =====
 

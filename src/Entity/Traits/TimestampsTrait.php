@@ -12,11 +12,13 @@ trait TimestampsTrait
 	/**
 	 * @ORM\Column(name="time_created", type="datetimetz_immutable")
 	 */
+	#[ORM\Column(name: "time_created", type: "datetimetz_immutable")]
 	private \DateTimeImmutable $timeCreated;
 
 	/**
 	 * @ORM\Column(name="time_modified", type="datetimetz_immutable", nullable=true)
 	 */
+	#[ORM\Column(name: "time_modified", type: "datetimetz_immutable", nullable: true)]
 	private ?\DateTimeImmutable $timeModified = null;
 
 	/**
