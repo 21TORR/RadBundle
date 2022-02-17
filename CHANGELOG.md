@@ -1,3 +1,9 @@
+2.0.1
+=====
+
+*   (improvement) Remove obsolete dependency on `21torr/cli`.
+
+
 2.0.0
 =====
 
