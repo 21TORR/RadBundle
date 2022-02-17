@@ -41,7 +41,9 @@ final class FormErrorNormalizer
 			/** @var FormError $childError */
 			foreach ($child->getErrors() as $childError)
 			{
-				$errors[$key][] = $this->translator->trans($childError->getMessage(), [], $translationDomain);
+				$errors[$key][] = null !== $this->translator
+					? $this->translator->trans($childError->getMessage(), [], $translationDomain)
+					: $childError->getMessage();
 			}
 
 			$this->normalizeNested($errors, $child, "{$key}_", $translationDomain);
@@ -72,7 +74,9 @@ final class FormErrorNormalizer
 		/** @var FormError $error */
 		foreach ($form->getErrors() as $error)
 		{
-			$errors[self::GLOBAL_KEY][] = $this->translator->trans($error->getMessage(), [], $translationDomain);
+			$errors[self::GLOBAL_KEY][] = null !== $this->translator
+				? $this->translator->trans($error->getMessage(), [], $translationDomain)
+				: $error->getMessage();
 		}
 
 		return $errors;
