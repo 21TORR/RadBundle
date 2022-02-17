@@ -20,7 +20,7 @@ abstract class BaseController extends AbstractController
 	public function normalizeFormErrors (FormInterface $form, string $translationDomain = "validators") : array
 	{
 		/** @var FormErrorNormalizer $normalizer */
-		$normalizer = $this->get(FormErrorNormalizer::class);
+		$normalizer = $this->container->get(FormErrorNormalizer::class);
 		return $normalizer->normalize($form, $translationDomain);
 	}
 
@@ -30,7 +30,7 @@ abstract class BaseController extends AbstractController
 	public function getLogger () : LoggerInterface
 	{
 		/** @var LoggerInterface $logger */
-		$logger = $this->get(LoggerInterface::class);
+		$logger = $this->container->get(LoggerInterface::class);
 
 		return $logger;
 	}
