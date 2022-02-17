@@ -1,3 +1,9 @@
+2.0.0
+=====
+
+*   (bc) Remove all command helpers. Use `21torr/cli` instead.
+
+
 1.1.6
 =====
 
