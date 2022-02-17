@@ -3,6 +3,7 @@
 
 *   (bc) Remove all command helpers. Use `21torr/cli` instead.
 *   (improvement) Allow Symfony v6.
+*   (bug) Fix usage of optional `translator` dependency
 
 
 1.1.6
