@@ -13,7 +13,6 @@ use Torr\Rad\Entity\Interfaces\SortableEntityInterface;
  */
 final class PropertiesSortableHandler
 {
-	private EntityRepository $repository;
 	private SortableHandler $sortable;
 	/** @var string[] */
 	private array $properties;
@@ -25,7 +24,6 @@ final class PropertiesSortableHandler
 	 */
 	public function __construct (EntityRepository $repository, string ...$properties)
 	{
-		$this->repository = $repository;
 		$this->sortable = new SortableHandler($repository);
 		$this->properties = $properties;
 		$this->accessor = PropertyAccess::createPropertyAccessor();

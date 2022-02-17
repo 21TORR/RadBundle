@@ -1,3 +1,10 @@
+2.0.0
+=====
+
+*   (bc) Remove all command helpers. Use `21torr/cli` instead.
+*   (improvement) Allow Symfony v6.
+
+
 1.1.6
 =====
 

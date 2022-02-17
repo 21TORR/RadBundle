@@ -1,37 +1,37 @@
 {
 	"name": "21torr/rad",
-	"type": "symfony-bundle",
 	"description": "RAD features for common Symfony apps.",
-	"homepage": "https://github.com/21TORR/rad-bundle",
 	"license": "MIT",
+	"type": "symfony-bundle",
 	"authors": [
 		{
 			"name": "21TORR",
 			"homepage": "https://www.21torr.com/"
 		}
 	],
+	"homepage": "https://github.com/21TORR/rad-bundle",
 	"require": {
 		"php": ">= 8.0",
 		"ext-json": "*",
 		"21torr/bundle-helpers": "^2.0",
 		"21torr/cli": "^1.0.1",
 		"psr/log": "^1.1 || ^2.0 || ^3.0",
-		"symfony/dependency-injection": "^5.2",
-		"symfony/deprecation-contracts": "^2.2",
-		"symfony/framework-bundle": "^5.2",
-		"symfony/http-foundation": "^5.2",
-		"symfony/http-kernel": "^5.2"
+		"symfony/dependency-injection": "^5.2 || ^6.0",
+		"symfony/deprecation-contracts": "^2.2 || ^3.0",
+		"symfony/framework-bundle": "^5.2 || ^6.0",
+		"symfony/http-foundation": "^5.2 || ^6.0",
+		"symfony/http-kernel": "^5.2 || ^6.0"
 	},
 	"require-dev": {
 		"bamarni/composer-bin-plugin": "^1.4",
 		"doctrine/dbal": "^2.12",
 		"doctrine/orm": "^2.7",
 		"roave/security-advisories": "dev-latest",
-		"symfony/console": "^5.2",
-		"symfony/form": "^5.2",
-		"symfony/phpunit-bridge": "^5.2",
-		"symfony/routing": "^5.2",
-		"symfony/translation": "^5.2",
+		"symfony/console": "^5.2 || ^6.0",
+		"symfony/form": "^5.2 || ^6.0",
+		"symfony/phpunit-bridge": "^5.2 || ^6.0",
+		"symfony/routing": "^5.2 || ^6.0",
+		"symfony/translation": "^5.2 || ^6.0",
 		"twig/twig": "^3.1"
 	},
 	"suggest": {
@@ -43,14 +43,6 @@
 		"symfony/translation": "To properly use the form error normalizer",
 		"twig/twig": "To use the twig functions"
 	},
-	"config": {
-		"sort-packages": true
-	},
-	"extra": {
-		"branch-alias": {
-			"dev-next": "1.x-dev"
-		}
-	},
 	"autoload": {
 		"psr-4": {
 			"Torr\\Rad\\": "src/"
@@ -59,6 +51,17 @@
 	"autoload-dev": {
 		"psr-4": {
 			"Tests\\Torr\\Rad\\": "tests/"
+		}
+	},
+	"config": {
+		"allow-plugins": {
+			"bamarni/composer-bin-plugin": true
+		},
+		"sort-packages": true
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-next": "2.x-dev"
 		}
 	},
 	"scripts": {
