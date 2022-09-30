@@ -147,7 +147,6 @@ class Pagination
 
 
 	/**
-	 * @return Pagination
 	 */
 	public function withNumberOfItems (int $numberOfItems) : self
 	{
