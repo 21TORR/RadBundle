@@ -1,3 +1,10 @@
+2.0.2
+=====
+
+* (improvement) Require PHP 8.1+
+* (improvement) Require Symfony 6.1+
+
+
 2.0.1
 =====
 

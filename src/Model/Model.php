@@ -17,8 +17,8 @@ abstract class Model implements ModelInterface
 	 */
 	public function __construct (ManagerRegistry $registry)
 	{
-		/** @var EntityManagerInterface $entityManager */
 		$entityManager = $registry->getManager();
+		\assert($entityManager instanceof EntityManagerInterface);
 		$this->entityManager = $entityManager;
 	}
 
