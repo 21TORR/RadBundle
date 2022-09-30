@@ -1,3 +1,9 @@
+2.x to 3.0
+==========
+
+* `Routable` was removed in favor of `Linkable` and `LinkableInterface`.
+
+
 1.x to 2.0
 ==========
 

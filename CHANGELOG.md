@@ -1,8 +1,10 @@
-2.0.2
+2.1.0
 =====
 
 * (improvement) Require PHP 8.1+
 * (improvement) Require Symfony 6.1+
+* (deprecation) `Routable` was deprecated in favor of `Linkable`.
+* (feature) Add `Linkable` and `LinkableInterface`.
 
 
 2.0.1
