@@ -7,34 +7,27 @@ use Symfony\Component\Routing\Exception\MissingMandatoryParametersException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Torr\Rad\Entity\Interfaces\EntityInterface;
-use Torr\Rad\Exception\Route\InvalidRoutableException;
 
 /**
  * A route configuration VO, that defers the actual generation of the route to a later point.
- *
- * @deprecated use {@see Linkable} instead.
  */
-final class Routable
+final class Linkable implements LinkableInterface
 {
 	public const REQUIRED = true;
 	public const OPTIONAL = false;
 
-	private string $route;
 	private array $parameters;
-	private int $referenceType;
 
 	/**
 	 * The parameters match the ones from {@see UrlGeneratorInterface::generate()}
 	 */
 	public function __construct (
-		string $route,
+		private readonly string $route,
 		array $parameters = [],
-		int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH,
+		private readonly int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH,
 	)
 	{
-		$this->route = $route;
 		$this->parameters = $this->normalizeParameters($parameters);
-		$this->referenceType = $referenceType;
 	}
 
 
@@ -86,13 +79,13 @@ final class Routable
 	/**
 	 * Generates the URL.
 	 *
-	 * Same as {@see UrlGeneratorInterface::generate()}.
+	 * Similar to {@see UrlGeneratorInterface::generate()}.
 	 *
 	 * @throws RouteNotFoundException
 	 * @throws MissingMandatoryParametersException
 	 * @throws InvalidParameterException
 	 */
-	public function generate (UrlGeneratorInterface $generator) : string
+	public function generateUrl (UrlGeneratorInterface $generator) : string
 	{
 		return $generator->generate(
 			$this->route,
@@ -115,54 +108,17 @@ final class Routable
 
 	/**
 	 * Generates the url for any given value
-	 *
-	 * @param string|static|null $value
 	 */
-	public static function generateUrl ($value, UrlGeneratorInterface $generator) : ?string
+	public static function generateUrlFromValue (
+		string|LinkableInterface|null $value,
+		UrlGeneratorInterface $generator,
+	) : ?string
 	{
-		self::ensureValidValue($value, self::OPTIONAL);
-
 		if (null === $value || \is_string($value))
 		{
 			return $value;
 		}
 
-		\assert($value instanceof self);
-		return $value->generate($generator);
-	}
-
-
-	/**
-	 * Returns whether the given value is valid for URL generation in {@see self::generateUrl()}.
-	 *
-	 * @param mixed $value
-	 */
-	public static function isValidValue ($value, bool $isRequired = self::REQUIRED) : bool
-	{
-		return null !== $value
-			? (\is_string($value) || $value instanceof self)
-			: !$isRequired;
-	}
-
-
-	/**
-	 * Ensures that the given value is a valid routable target, that can be handled in
-	 * {@see self::generateUrl()}.
-	 *
-	 * @param mixed $value
-	 *
-	 * @throws InvalidRoutableException
-	 */
-	public static function ensureValidValue ($value, bool $isRequired = self::REQUIRED) : void
-	{
-		if (!self::isValidValue($value, $isRequired))
-		{
-			throw new InvalidRoutableException(
-				$value,
-				$isRequired
-					? \sprintf("string or %s", self::class)
-					: \sprintf("string, %s or null", self::class),
-			);
-		}
+		return $value->generateUrl($generator);
 	}
 }
