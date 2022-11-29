@@ -70,6 +70,14 @@
 		],
 		"post-update-cmd": [
 			"@composer bin all update --ansi"
+		],
+		"lint": [
+			"@composer bin c-norm normalize \"$(pwd)/composer.json\" --indent-style tab --indent-size 1 --dry-run --ansi",
+			"php-cs-fixer fix --diff --config vendor-bin/cs-fixer/vendor/21torr/php-cs-fixer/.php-cs-fixer.dist.php --dry-run --no-interaction --ansi"
+		],
+		"test": [
+			"phpunit",
+			"phpstan analyze -c phpstan.neon . --ansi"
 		]
 	}
 }
