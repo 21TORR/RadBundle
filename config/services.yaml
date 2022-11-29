@@ -11,4 +11,4 @@ services:
             - ../src/Exception
             - ../src/Pagination/Paginat*
             - ../src/Route
-            - ../src/TorrRadBundle.php}
+            - ../src/TorrRadBundle.php
