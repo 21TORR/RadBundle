@@ -1,3 +1,9 @@
+2.2.0 (unreleased)
+=====
+
+* (feature) Add `ApiResponse`.
+
+
 2.1.0
 =====
 

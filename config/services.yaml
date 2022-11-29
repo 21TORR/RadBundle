@@ -5,4 +5,10 @@ services:
 
     Torr\Rad\:
         resource: ../src/*
-        exclude: ../src/{Entity,Exception,Pagination/Paginat*,TorrRadBundle.php}
+        exclude:
+            - ../src/Api
+            - ../src/Entity
+            - ../src/Exception
+            - ../src/Pagination/Paginat*
+            - ../src/Route
+            - ../src/TorrRadBundle.php
