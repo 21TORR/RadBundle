@@ -8,11 +8,11 @@ use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Torr\Rad\Api\ApiResponse;
 
-#[AsEventListener(KernelEvents::VIEW, "onView")]
 final class ControllerResponseListener
 {
 	/**
 	 */
+	#[AsEventListener(KernelEvents::VIEW)]
 	public function onView (ViewEvent $event) : void
 	{
 		$result = $event->getControllerResult();
