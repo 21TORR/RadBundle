@@ -36,22 +36,4 @@ class ApiResponseTest extends TestCase
 			"error" => "error message",
 		], $apiResponse->toArray());
 	}
-
-	/**
-	 *
-	 */
-	public function provideStatusCode () : iterable
-	{
-		yield [200, new ApiResponse(true)];
-		yield [400, new ApiResponse(false)];
-		yield [418, new ApiResponse(false, statusCode: 418)];
-	}
-
-	/**
-	 * @dataProvider provideStatusCode
-	 */
-	public function testStatusCode (int $expected, ApiResponse $apiResponse) : void
-	{
-		self::assertSame($expected, $apiResponse->toResponse()->getStatusCode());
-	}
 }
