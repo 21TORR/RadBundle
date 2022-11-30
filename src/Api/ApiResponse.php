@@ -4,16 +4,37 @@ namespace Torr\Rad\Api;
 
 class ApiResponse
 {
-	public readonly int $statusCode;
+	public int $statusCode;
+	public ?string $error = null;
 
+	/**
+	 */
 	public function __construct (
 		private readonly bool $ok,
 		private readonly mixed $data = null,
-		private readonly ?string $error = null,
-		?int $statusCode = null,
 	)
 	{
-		$this->statusCode = $statusCode ?? ($ok ? 200 : 400);
+		$this->statusCode = $ok ? 200 : 400;
+	}
+
+
+	/**
+	 * @return $this
+	 */
+	public function withStatusCode (int $statusCode) : self
+	{
+		$this->statusCode = $statusCode;
+		return $this;
+	}
+
+
+	/**
+	 * @return $this
+	 */
+	public function withError (?string $error) : self
+	{
+		$this->error = $error;
+		return $this;
 	}
 
 
