@@ -47,7 +47,7 @@ class ControllerResponseListenerTest extends TestCase
 	{
 		yield [200, new ApiResponse(true)];
 		yield [400, new ApiResponse(false)];
-		yield [418, new ApiResponse(false, statusCode: 418)];
+		yield [418, (new ApiResponse(false))->withStatusCode(418)];
 	}
 
 	/**

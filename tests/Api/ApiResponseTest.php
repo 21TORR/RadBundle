@@ -24,11 +24,11 @@ class ApiResponseTest extends TestCase
 	 */
 	public function testMaximal () : void
 	{
-		$apiResponse = new ApiResponse(
+		$apiResponse = (new ApiResponse(
 			true,
 			["o" => "hai"],
-			"error message",
-		);
+		))
+			->withError("error message");
 
 		self::assertEquals([
 			"ok" => true,
