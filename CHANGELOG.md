@@ -1,3 +1,10 @@
+2.3.0
+=====
+
+* (feature) Add `EntityModel`.
+* (deprecation) Deprecate `Model`.
+
+
 2.2.0
 =====
 

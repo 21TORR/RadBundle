@@ -3,32 +3,21 @@
 namespace Torr\Rad\Model;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Torr\Rad\Entity\Interfaces\EntityInterface;
 
-/**
- * Base model that implements some basic integration.
- *
- * @deprecated Use {@see EntityModel} instead.
- */
-abstract class Model implements ModelInterface
+abstract class EntityModel implements ModelInterface
 {
-	protected EntityManagerInterface $entityManager;
-
 	/**
 	 */
-	public function __construct (ManagerRegistry $registry)
-	{
-		$entityManager = $registry->getManager();
-		\assert($entityManager instanceof EntityManagerInterface);
-		$this->entityManager = $entityManager;
-	}
+	public function __construct (
+		protected readonly EntityManagerInterface $entityManager,
+	) {}
 
 
 	/**
 	 * @inheritDoc
 	 */
-	public function add (EntityInterface $entity)
+	public function add (EntityInterface $entity) : static
 	{
 		$this->entityManager->persist($entity);
 		return $this;
@@ -38,7 +27,7 @@ abstract class Model implements ModelInterface
 	/**
 	 * @inheritDoc
 	 */
-	public function update (EntityInterface $entity)
+	public function update (EntityInterface $entity) : static
 	{
 		// automatic integration for entities that use the TimestampsTrait
 		if (\method_exists($entity, 'markAsModified'))
@@ -53,7 +42,7 @@ abstract class Model implements ModelInterface
 	/**
 	 * @inheritDoc
 	 */
-	public function remove (EntityInterface $entity)
+	public function remove (EntityInterface $entity) : static
 	{
 		$this->entityManager->remove($entity);
 		return $this;
@@ -63,7 +52,7 @@ abstract class Model implements ModelInterface
 	/**
 	 * @inheritDoc
 	 */
-	public function flush ()
+	public function flush () : static
 	{
 		$this->entityManager->flush();
 		return $this;
