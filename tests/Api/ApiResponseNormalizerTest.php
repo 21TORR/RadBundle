@@ -4,8 +4,9 @@ namespace Tests\Torr\Rad\Api;
 
 use Torr\Rad\Api\ApiResponse;
 use PHPUnit\Framework\TestCase;
+use Torr\Rad\Api\ApiResponseNormalizer;
 
-class ApiResponseTest extends TestCase
+class ApiResponseNormalizerTest extends TestCase
 {
 	/**
 	 *
@@ -13,10 +14,11 @@ class ApiResponseTest extends TestCase
 	public function testMinimal () : void
 	{
 		$apiResponse = new ApiResponse(false);
+		$normalizer = new ApiResponseNormalizer();
 
 		self::assertEquals([
 			"ok" => false,
-		], $apiResponse->toArray());
+		], $normalizer->normalize($apiResponse));
 	}
 
 	/**
@@ -29,11 +31,12 @@ class ApiResponseTest extends TestCase
 			["o" => "hai"],
 		))
 			->withError("error message");
+		$normalizer = new ApiResponseNormalizer();
 
 		self::assertEquals([
 			"ok" => true,
 			"data" => ["o" => "hai"],
 			"error" => "error message",
-		], $apiResponse->toArray());
+		], $normalizer->normalize($apiResponse));
 	}
 }

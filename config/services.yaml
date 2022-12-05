@@ -6,7 +6,7 @@ services:
     Torr\Rad\:
         resource: ../src/*
         exclude:
-            - ../src/Api
+            - ../src/Api/ApiResponse.php
             - ../src/Entity
             - ../src/Exception
             - ../src/Pagination/Paginat*

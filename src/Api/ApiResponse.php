@@ -10,8 +10,8 @@ class ApiResponse
 	/**
 	 */
 	public function __construct (
-		private readonly bool $ok,
-		private readonly mixed $data = null,
+		public readonly bool $ok,
+		public readonly mixed $data = null,
 	)
 	{
 		$this->statusCode = $ok ? 200 : 400;
@@ -35,20 +35,5 @@ class ApiResponse
 	{
 		$this->error = $error;
 		return $this;
-	}
-
-
-	/**
-	 */
-	public function toArray () : array
-	{
-		return \array_filter(
-			[
-				"ok" => $this->ok,
-				"data" => $this->data,
-				"error" => $this->error,
-			],
-			static fn (mixed $value) => null !== $value,
-		);
 	}
 }
