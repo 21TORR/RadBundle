@@ -1,3 +1,9 @@
+2.3.1
+=====
+
+* (improvement) Add explicit `ApiResponseNormalizer`.
+
+
 2.3.0
 =====
 
