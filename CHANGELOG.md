@@ -1,3 +1,11 @@
+2.3.0
+=====
+
+* (feature) Add `EntityModel`.
+* (deprecation) Deprecate `Model`.
+* (improvement) Require Symfony 6.2+.
+
+
 2.2.0
 =====
 
