@@ -40,7 +40,7 @@ abstract class BaseController extends AbstractController
 	 */
 	public function fetchJsonRequestBody (Request $request, bool $allowInvalid = false) : array
 	{
-		if ("json" !== $request->getContentType())
+		if ("json" !== $request->getContentTypeFormat())
 		{
 			if ($allowInvalid)
 			{
