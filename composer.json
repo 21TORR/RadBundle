@@ -31,6 +31,7 @@
 		"symfony/form": "^6.2",
 		"symfony/phpunit-bridge": "^6.2",
 		"symfony/routing": "^6.2",
+		"symfony/security-bundle": "^6.2",
 		"symfony/translation": "^6.2",
 		"twig/twig": "^3.4"
 	},
@@ -40,6 +41,7 @@
 		"symfony/console": "To use TorrStyle",
 		"symfony/form": "To use the FormErrorNormalizer",
 		"symfony/routing": "To use the Routable",
+		"symfony/security": "To automatically add the CAN_ role voter",
 		"symfony/translation": "To properly use the form error normalizer",
 		"twig/twig": "To use the twig functions"
 	},
@@ -61,7 +63,7 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-next": "2.x-dev"
+			"dev-next": "2.3.x-dev"
 		}
 	},
 	"scripts": {

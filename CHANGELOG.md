@@ -1,3 +1,9 @@
+2.4.0
+=====
+
+* (feature) Add and enable abilities voter, that votes on `CAN_` attributes.
+
+
 2.3.1
 =====
 
