@@ -12,7 +12,9 @@ trait IdTrait
 {
 	/**
 	 * @ORM\Id()
+	 *
 	 * @ORM\GeneratedValue(strategy="AUTO")
+	 *
 	 * @ORM\Column(name="id", type="integer")
 	 */
 	#[
