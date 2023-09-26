@@ -2,6 +2,7 @@
 =====
 
 * (feature) Add and enable abilities voter, that votes on `CAN_` attributes.
+* (internal) Require PHP 8.2.
 
 
 2.3.1
