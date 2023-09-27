@@ -2,9 +2,11 @@
 
 namespace Torr\Rad;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Torr\BundleHelpers\Bundle\BundleExtension;
+use Torr\Rad\DependencyInjection\RemoveOptionalServicesCompilerPass;
 
 class TorrRadBundle extends Bundle
 {
@@ -14,6 +16,14 @@ class TorrRadBundle extends Bundle
 	public function getContainerExtension () : ExtensionInterface
 	{
 		return new BundleExtension($this);
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function build (ContainerBuilder $container) : void
+	{
+		$container->addCompilerPass(new RemoveOptionalServicesCompilerPass());
 	}
 
 	/**
