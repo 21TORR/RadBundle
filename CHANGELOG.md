@@ -1,3 +1,9 @@
+2.5.0
+=====
+
+* (feature) Add `DoctrineChangeChecker`, to check for content changes in the unit of work.
+
+
 2.4.0
 =====
 
