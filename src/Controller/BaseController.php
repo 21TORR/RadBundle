@@ -15,6 +15,18 @@ use Torr\Rad\Form\FormErrorNormalizer;
 abstract class BaseController extends AbstractController
 {
 	/**
+	 * @template T of object
+	 * @param class-string<T> $service
+	 *
+	 * @return T
+	 */
+	protected function getService (string $service) : object
+	{
+		return $this->container->get($service);
+	}
+
+
+	/**
 	 * Normalizes the errors from the given form.
 	 *
 	 * @protected
@@ -23,9 +35,7 @@ abstract class BaseController extends AbstractController
 	 */
 	public function normalizeFormErrors (FormInterface $form, string $translationDomain = "validators") : array
 	{
-		$normalizer = $this->container->get(FormErrorNormalizer::class);
-		\assert($normalizer instanceof FormErrorNormalizer);
-		return $normalizer->normalize($form, $translationDomain);
+		return $this->getService(FormErrorNormalizer::class)->normalize($form, $translationDomain);
 	}
 
 	/**
@@ -37,10 +47,7 @@ abstract class BaseController extends AbstractController
 	 */
 	public function getLogger () : LoggerInterface
 	{
-		$logger = $this->container->get(LoggerInterface::class);
-		\assert($logger instanceof LoggerInterface);
-
-		return $logger;
+		return $this->getService(LoggerInterface::class);
 	}
 
 	/**

@@ -2,6 +2,7 @@
 =====
 
 * (deprecation) Mark custom `public` methods in `BaseController` as `@protected`. This is a deprecation notice for an upcoming BC break in v3.0.0.
+* (improvement) Add `BaseController::getService()`, which will tell PhpStorm and PhpStan about the concrete service type.
 
 
 2.4.0
