@@ -16,6 +16,7 @@ abstract class BaseController extends AbstractController
 {
 	/**
 	 * @template T of object
+	 *
 	 * @param class-string<T> $service
 	 *
 	 * @return T
