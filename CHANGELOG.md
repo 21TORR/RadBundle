@@ -1,3 +1,9 @@
+2.4.1
+=====
+
+* (deprecation) Mark custom `public` methods in `BaseController` as `@protected`. This is a deprecation notice for an upcoming BC break in v3.0.0.
+
+
 2.4.0
 =====
 

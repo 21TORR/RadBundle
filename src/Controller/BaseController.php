@@ -16,6 +16,10 @@ abstract class BaseController extends AbstractController
 {
 	/**
 	 * Normalizes the errors from the given form.
+	 *
+	 * @protected
+	 *
+	 * @todo change to real `protected` in v3.0
 	 */
 	public function normalizeFormErrors (FormInterface $form, string $translationDomain = "validators") : array
 	{
@@ -26,6 +30,10 @@ abstract class BaseController extends AbstractController
 
 	/**
 	 * Returns the default logger.
+	 *
+	 * @protected
+	 *
+	 * @todo change to real `protected` in v3.0
 	 */
 	public function getLogger () : LoggerInterface
 	{
@@ -37,6 +45,10 @@ abstract class BaseController extends AbstractController
 
 	/**
 	 * Fetches the data in the request body as JSON.
+	 *
+	 * @protected
+	 *
+	 * @todo change to real `protected` in v3.0
 	 */
 	public function fetchJsonRequestBody (Request $request, bool $allowInvalid = false) : array
 	{
