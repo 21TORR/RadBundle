@@ -15,28 +15,49 @@ use Torr\Rad\Form\FormErrorNormalizer;
 abstract class BaseController extends AbstractController
 {
 	/**
+	 * @template T of object
+	 *
+	 * @param class-string<T> $service
+	 *
+	 * @return T
+	 */
+	protected function getService (string $service) : object
+	{
+		// @phpstan-ignore-next-line
+		return $this->container->get($service);
+	}
+
+
+	/**
 	 * Normalizes the errors from the given form.
+	 *
+	 * @protected
+	 *
+	 * @todo change to real `protected` in v3.0
 	 */
 	public function normalizeFormErrors (FormInterface $form, string $translationDomain = "validators") : array
 	{
-		$normalizer = $this->container->get(FormErrorNormalizer::class);
-		\assert($normalizer instanceof FormErrorNormalizer);
-		return $normalizer->normalize($form, $translationDomain);
+		return $this->getService(FormErrorNormalizer::class)->normalize($form, $translationDomain);
 	}
 
 	/**
 	 * Returns the default logger.
+	 *
+	 * @protected
+	 *
+	 * @todo change to real `protected` in v3.0
 	 */
 	public function getLogger () : LoggerInterface
 	{
-		$logger = $this->container->get(LoggerInterface::class);
-		\assert($logger instanceof LoggerInterface);
-
-		return $logger;
+		return $this->getService(LoggerInterface::class);
 	}
 
 	/**
 	 * Fetches the data in the request body as JSON.
+	 *
+	 * @protected
+	 *
+	 * @todo change to real `protected` in v3.0
 	 */
 	public function fetchJsonRequestBody (Request $request, bool $allowInvalid = false) : array
 	{
