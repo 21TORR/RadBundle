@@ -23,6 +23,7 @@ abstract class BaseController extends AbstractController
 	 */
 	protected function getService (string $service) : object
 	{
+		// @phpstan-ignore-next-line
 		return $this->container->get($service);
 	}
 
