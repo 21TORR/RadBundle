@@ -4,6 +4,7 @@ namespace Tests\Torr\Rad\Doctrine;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\UnitOfWork;
+use Doctrine\Persistence\ManagerRegistry;
 use Torr\Rad\Doctrine\DoctrineChangeChecker;
 use PHPUnit\Framework\TestCase;
 
@@ -83,7 +84,12 @@ class DoctrineChangeCheckerTest extends TestCase
 			->method("getUnitOfWork")
 			->willReturn($unitOfWork);
 
-		$checker = new DoctrineChangeChecker($entityManager);
+		$registry = $this->createMock(ManagerRegistry::class);
+		$registry
+			->method("getManager")
+			->willReturn($entityManager);
+
+		$checker = new DoctrineChangeChecker($registry);
 		self::assertSame($expected, $checker->hasContentChanged());
 	}
 
@@ -146,7 +152,12 @@ class DoctrineChangeCheckerTest extends TestCase
 			->method("getUnitOfWork")
 			->willReturn($unitOfWork);
 
-		$checker = new DoctrineChangeChecker($entityManager);
+		$registry = $this->createMock(ManagerRegistry::class);
+		$registry
+			->method("getManager")
+			->willReturn($entityManager);
+
+		$checker = new DoctrineChangeChecker($registry);
 		self::assertSame($expected, $checker->hasContentChanged());
 	}
 }
