@@ -69,9 +69,14 @@ final readonly class DoctrineChangeChecker
 	/**
 	 * Returns the changes of the given entity
 	 *
-	 * @return array<string, array{mixed, mixed}|PersistentCollection>
+	 * @param string[] $redactFields If present, these fields values will be overwritten with "(redacted)"
+	 *
+	 * @return array<string, array{"old": mixed, "new": mixed}|PersistentCollection>
 	 */
-	public function getEntityChanges (object $entity) : array
+	public function getEntityChanges (
+		object $entity,
+		array $redactFields = [],
+	) : array
 	{
 		$entityClass = \get_class($entity);
 		$entityManager = $this->managerRegistry->getManagerForClass($entityClass);
@@ -88,6 +93,22 @@ final readonly class DoctrineChangeChecker
 		$unitOfWork = clone $entityManager->getUnitOfWork();
 		$unitOfWork->computeChangeSets();
 
-		return $unitOfWork->getEntityChangeSet($entity);
+		$changes = $unitOfWork->getEntityChangeSet($entity);
+		$transformed = [];
+
+		foreach ($changes as $key => $values)
+		{
+			if (\in_array($key, $redactFields, true))
+			{
+				$values = ["(redacted)", "(redacted)"];
+			}
+
+			$transformed[$key] = [
+				"old" => $values[0],
+				"new" => $values[1],
+			];
+		}
+
+		return $transformed;
 	}
 }
