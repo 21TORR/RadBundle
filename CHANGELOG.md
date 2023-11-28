@@ -1,3 +1,9 @@
+2.5.1
+=====
+
+* (bug) Remove invalid check for class existence.
+
+
 2.5.0
 =====
 
