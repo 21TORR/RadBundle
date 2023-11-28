@@ -63,7 +63,8 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-next": "2.3.x-dev"
+			"2.x-dev": "2.5.x-dev",
+			"dev-next": "2.5.x-dev"
 		}
 	},
 	"scripts": {
