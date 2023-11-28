@@ -3,25 +3,38 @@
 namespace Torr\Rad\Doctrine;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\PersistentCollection;
+use Doctrine\Persistence\ManagerRegistry;
+use Torr\Rad\Exception\Doctrine\InvalidDoctrineChangeCheckException;
 
 final readonly class DoctrineChangeChecker
 {
 	/**
 	 */
 	public function __construct (
-		private EntityManagerInterface $entityManager,
+		private ManagerRegistry $managerRegistry,
 	) {}
 
 
 	/**
-	 * Determines whether any content in the entities (or the entities themselves)
+	 * Determines whether any content globally in any of the entities (or the entities themselves)
 	 * has changed. Only changing "timeModified" doesn't count as content change.
 	 *
 	 * @api
 	 */
 	public function hasContentChanged () : bool
 	{
-		$unitOfWork = $this->entityManager->getUnitOfWork();
+		$defaultEntityManager = $this->managerRegistry->getManager();
+
+		if (!$defaultEntityManager instanceof EntityManagerInterface)
+		{
+			throw new InvalidDoctrineChangeCheckException(\sprintf(
+				"Default manager is no entity manager, but '%s'",
+				\get_debug_type($defaultEntityManager),
+			));
+		}
+
+		$unitOfWork = $defaultEntityManager->getUnitOfWork();
 		$unitOfWork->computeChangeSets();
 
 		// If any entity was added / removed, something changed, so early exit
@@ -49,5 +62,30 @@ final readonly class DoctrineChangeChecker
 		}
 
 		return false;
+	}
+
+
+	/**
+	 * Returns the changes of the given entity
+	 *
+	 * @return array<string, array{mixed, mixed}|PersistentCollection>
+	 */
+	public function getEntityChanges (object $entity) : array
+	{
+		$entityClass = \get_class($entity);
+		$entityManager = $this->managerRegistry->getManagerForClass($entityClass);
+
+		if (!$entityManager instanceof EntityManagerInterface)
+		{
+			throw new InvalidDoctrineChangeCheckException(\sprintf(
+				"Could not fetch entity manager for entity of type '%s'",
+				$entityClass,
+			));
+		}
+
+		$unitOfWork = $entityManager->getUnitOfWork();
+		$unitOfWork->computeChangeSets();
+
+		return $unitOfWork->getEntityChangeSet($entity);
 	}
 }

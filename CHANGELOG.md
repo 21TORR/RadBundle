@@ -1,3 +1,9 @@
+2.5.0
+=====
+
+* (feature) Add `DoctrineChangeChecker::getEntityChanges()`.
+
+
 2.4.1
 =====
 
