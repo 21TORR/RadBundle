@@ -1,3 +1,10 @@
+2.5.2
+=====
+
+* (bug) Do not modify original UnitOfWork in `DoctrineChangeChecker`.
+* (improvement) Allow to automatically redact changed fields' values in `DoctrineChangeChecker::getEntityChanges()`.
+
+
 2.5.1
 =====
 
