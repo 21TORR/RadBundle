@@ -34,7 +34,8 @@ final readonly class DoctrineChangeChecker
 			));
 		}
 
-		$unitOfWork = $defaultEntityManager->getUnitOfWork();
+		// clone the uow, to not touch the original calculated changesets
+		$unitOfWork = clone $defaultEntityManager->getUnitOfWork();
 		$unitOfWork->computeChangeSets();
 
 		// If any entity was added / removed, something changed, so early exit
@@ -83,7 +84,8 @@ final readonly class DoctrineChangeChecker
 			));
 		}
 
-		$unitOfWork = $entityManager->getUnitOfWork();
+		// clone the uow, to not touch the original calculated changesets
+		$unitOfWork = clone $entityManager->getUnitOfWork();
 		$unitOfWork->computeChangeSets();
 
 		return $unitOfWork->getEntityChangeSet($entity);

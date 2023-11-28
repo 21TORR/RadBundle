@@ -1,3 +1,9 @@
+2.5.2
+=====
+
+* (bug) Do not modify original UnitOfWork in `DoctrineChangeChecker`.
+
+
 2.5.1
 =====
 
