@@ -1,3 +1,9 @@
+2.6.0
+=====
+
+* (feature) Add `InMemoryCache`.
+
+
 2.5.2
 =====
 
