@@ -2,8 +2,6 @@ services:
     _defaults:
         autoconfigure: true
         autowire: true
-        bind:
-            $isDebug: '%kernel.debug%'
 
     Torr\Rad\:
         resource: ../src/*

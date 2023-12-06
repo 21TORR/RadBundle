@@ -1,3 +1,9 @@
+2.6.1
+=====
+
+* (bug) Remove invalid service binding.
+
+
 2.6.0
 =====
 
