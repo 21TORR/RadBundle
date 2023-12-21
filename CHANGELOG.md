@@ -2,6 +2,7 @@
 =====
 
 * (improvement) Bump required Symfony.
+* (bc) Remove sortable handlers.
 
 
 2.6.1
