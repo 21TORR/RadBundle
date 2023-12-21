@@ -10,6 +10,7 @@
 * (bc) Replace `IdTrait` + `TimestampsTrait` to `EntityFieldsTrait` and `ModifiableEntityFieldsTrait`.
 * (bc) Moved `EntityInterface` to new namespace and add time created getter.
 * (bc) Remove `Routable`.
+* (improvement) Use the clock for setting date values.
 
 
 2.6.1
