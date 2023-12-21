@@ -1,8 +1,9 @@
-2.7.0 (unreleased)
+3.0.0 (unreleased)
 =====
 
 * (improvement) Bump required Symfony.
 * (bc) Remove sortable handlers.
+* (bc) Remove simple entity search handler.
 
 
 2.6.1
