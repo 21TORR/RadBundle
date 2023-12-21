@@ -2,6 +2,7 @@
 
 namespace Torr\Rad\Entity\Traits;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Torr\Rad\Entity\Interfaces\EntityInterface;
 
@@ -11,17 +12,10 @@ use Torr\Rad\Entity\Interfaces\EntityInterface;
 trait IdTrait
 {
 	/**
-	 * @ORM\Id()
-	 *
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 *
-	 * @ORM\Column(name="id", type="integer")
 	 */
-	#[
-		ORM\Id(),
-		ORM\GeneratedValue(strategy: "AUTO"),
-		ORM\Column(name: "id", type: "integer")
-	]
+	#[ORM\Id]
+	#[ORM\GeneratedValue(strategy: "AUTO")]
+	#[ORM\Column(name: "id", type: Types::INTEGER)]
 	private ?int $id = null;
 
 
