@@ -4,6 +4,8 @@
 * (improvement) Bump required Symfony.
 * (bc) Remove sortable handlers.
 * (bc) Remove simple entity search handler.
+* (bc) Remove `Model`.
+* (bc) Fix missing return types in `ModelInterface`.
 
 
 2.6.1
