@@ -3,7 +3,7 @@
 namespace Torr\Rad\Model;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Torr\Rad\Entity\Interfaces\EntityInterface;
+use Torr\Rad\Entity\EntityInterface;
 
 abstract class EntityModel implements ModelInterface
 {

@@ -2,16 +2,14 @@
 
 namespace Tests\Torr\Rad\Fixtures;
 
-use Torr\Rad\Entity\Interfaces\EntityInterface;
-use Torr\Rad\Entity\Traits\IdTrait;
-use Torr\Rad\Entity\Traits\TimestampsTrait;
+use Torr\Rad\Entity\EntityInterface;
+use Torr\Rad\Entity\ModifiableEntityFieldsTrait;
 
 /**
  */
 class ExampleEntity implements EntityInterface
 {
-	use IdTrait;
-	use TimestampsTrait;
+	use ModifiableEntityFieldsTrait;
 
 	public function __construct (?int $id = null)
 	{

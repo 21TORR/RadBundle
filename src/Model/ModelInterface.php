@@ -2,7 +2,7 @@
 
 namespace Torr\Rad\Model;
 
-use Torr\Rad\Entity\Interfaces\EntityInterface;
+use Torr\Rad\Entity\EntityInterface;
 
 /**
  * Interface for all models in the app
@@ -14,7 +14,7 @@ interface ModelInterface
 	 *
 	 * @return $this
 	 */
-	public function add (EntityInterface $entity);
+	public function add (EntityInterface $entity) : static;
 
 
 	/**
@@ -22,7 +22,7 @@ interface ModelInterface
 	 *
 	 * @return $this
 	 */
-	public function update (EntityInterface $entity);
+	public function update (EntityInterface $entity) : static;
 
 
 	/**
@@ -30,7 +30,7 @@ interface ModelInterface
 	 *
 	 * @return $this
 	 */
-	public function remove (EntityInterface $entity);
+	public function remove (EntityInterface $entity) : static;
 
 
 	/**
@@ -38,5 +38,5 @@ interface ModelInterface
 	 *
 	 * @return $this
 	 */
-	public function flush ();
+	public function flush () : static;
 }

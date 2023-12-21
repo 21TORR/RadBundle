@@ -1,3 +1,18 @@
+3.0.0 (unreleased)
+=====
+
+* (improvement) Bump required Symfony.
+* (bc) Remove sortable handlers.
+* (bc) Remove simple entity search handler.
+* (bc) Remove `Model`.
+* (bc) Fix missing return types in `ModelInterface`.
+* (internal) Use HtmlBuilder for `DataContainer`.
+* (bc) Replace `IdTrait` + `TimestampsTrait` to `EntityFieldsTrait` and `ModifiableEntityFieldsTrait`.
+* (bc) Moved `EntityInterface` to new namespace and add time created getter.
+* (bc) Remove `Routable`.
+* (improvement) Use the clock for setting date values.
+
+
 2.6.1
 =====
 
