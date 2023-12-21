@@ -2,6 +2,7 @@
 
 namespace Torr\Rad\Entity\Traits;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,9 +17,8 @@ trait TimestampsTrait
 	private \DateTimeImmutable $timeCreated;
 
 	/**
-	 * @ORM\Column(name="time_modified", type="datetimetz_immutable", nullable=true)
 	 */
-	#[ORM\Column(name: "time_modified", type: "datetimetz_immutable", nullable: true)]
+	#[ORM\Column(name: "time_modified", type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
 	private ?\DateTimeImmutable $timeModified = null;
 
 	/**
