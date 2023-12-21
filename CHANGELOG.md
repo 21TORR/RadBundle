@@ -1,3 +1,9 @@
+2.7.0 (unreleased)
+=====
+
+* (improvement) Bump required Symfony.
+
+
 2.6.1
 =====
 
