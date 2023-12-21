@@ -6,6 +6,7 @@
 * (bc) Remove simple entity search handler.
 * (bc) Remove `Model`.
 * (bc) Fix missing return types in `ModelInterface`.
+* (internal) Use HtmlBuilder for `DataContainer`.
 
 
 2.6.1

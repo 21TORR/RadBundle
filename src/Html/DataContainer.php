@@ -3,9 +3,22 @@
 namespace Torr\Rad\Html;
 
 use Symfony\Component\HttpFoundation\Response;
+use Torr\HtmlBuilder\Builder\HtmlBuilder;
+use Torr\HtmlBuilder\Node\HtmlElement;
 
 class DataContainer
 {
+	private HtmlBuilder $htmlBuilder;
+
+	/**
+	 *
+	 */
+	public function __construct ()
+	{
+		$this->htmlBuilder = new HtmlBuilder();
+	}
+
+
 	/**
 	 * Renders the HTML of the data container.
 	 */
@@ -16,15 +29,15 @@ class DataContainer
 			return "";
 		}
 
-		return \sprintf(
-			'<script%s class="_data-container %s" type="application/json">%s</script>',
-			null !== $id ? ' id="' . \htmlspecialchars($id, \ENT_QUOTES) . '"' : "",
-			\htmlspecialchars($class, \ENT_QUOTES),
-			\htmlspecialchars(
-				\json_encode($data, \JSON_THROW_ON_ERROR),
-				\ENT_NOQUOTES,
-			),
-		);
+		$element = new HtmlElement("script", [
+			"id" => $id,
+			"class" => "_data-container {$class}",
+			"type" => "application/json",
+		], [
+			\json_encode($data, \JSON_THROW_ON_ERROR),
+		]);
+
+		return $this->htmlBuilder->build($element);
 	}
 
 
