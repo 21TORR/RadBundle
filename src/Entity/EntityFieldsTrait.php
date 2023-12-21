@@ -26,7 +26,7 @@ trait EntityFieldsTrait
 	/**
 	 *
 	 */
-	#[ORM\Column(name: "time_created", type: "datetimetz_immutable")]
+	#[ORM\Column(name: "time_created", type: Types::DATETIMETZ_IMMUTABLE)]
 	private \DateTimeImmutable $timeCreated;
 
 
