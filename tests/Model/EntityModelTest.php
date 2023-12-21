@@ -3,12 +3,10 @@
 namespace Tests\Torr\Rad\Model;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
 use Tests\Torr\Rad\Fixtures\ExampleEntity;
-use Torr\Rad\Entity\Interfaces\EntityInterface;
-use Torr\Rad\Entity\Traits\IdTrait;
-use Torr\Rad\Entity\Traits\TimestampsTrait;
+use Torr\Rad\Entity\EntityInterface;
+use Torr\Rad\Entity\ModifiableEntityFieldsTrait;
 use Torr\Rad\Model\EntityModel;
 
 final class EntityModelTest extends TestCase
@@ -84,17 +82,5 @@ final class EntityModelTest extends TestCase
 
 		$model = new class ($manager) extends EntityModel {};
 		$model->flush();
-	}
-
-	/**
-	 *
-	 */
-	private function createEntity () : EntityInterface
-	{
-		return new class implements EntityInterface
-		{
-			use IdTrait;
-			use TimestampsTrait;
-		};
 	}
 }

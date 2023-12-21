@@ -7,6 +7,8 @@
 * The simple entity search handlers were removed. There is no replacement.
 * The `Model` class was removed. Use `EntityModel` instead.
 * The missing return types in `ModelInterface` were added.
+* `IdTrait` and `TimestampsTrait` were removed. Migrate to `EntityFieldsTrait` and `ModifiableEntityFieldsTrait` instead.
+* `EntityInterface` was moved to a new namespace and has an additional method.
 
 
 1.x to 2.0

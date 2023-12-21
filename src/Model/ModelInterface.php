@@ -2,7 +2,7 @@
 
 namespace Torr\Rad\Model;
 
-use Torr\Rad\Entity\Interfaces\EntityInterface;
+use Torr\Rad\Entity\EntityInterface;
 
 /**
  * Interface for all models in the app

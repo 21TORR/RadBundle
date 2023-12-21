@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Torr\Rad\Entity\Interfaces;
+namespace Torr\Rad\Entity;
 
 interface EntityInterface
 {
@@ -16,4 +16,10 @@ interface EntityInterface
 	 * @return bool true if new (= not yet flushed), false otherwise
 	 */
 	public function isNew () : bool;
+
+
+	/**
+	 * Returns the time the entity was created.
+	 */
+	public function getTimeCreated () : \DateTimeImmutable;
 }

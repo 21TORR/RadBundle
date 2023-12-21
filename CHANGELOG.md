@@ -7,6 +7,8 @@
 * (bc) Remove `Model`.
 * (bc) Fix missing return types in `ModelInterface`.
 * (internal) Use HtmlBuilder for `DataContainer`.
+* (bc) Replace `IdTrait` + `TimestampsTrait` to `EntityFieldsTrait` and `ModifiableEntityFieldsTrait`.
+* (bc) Moved `EntityInterface` to new namespace and add time created getter.
 
 
 2.6.1

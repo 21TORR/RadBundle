@@ -6,7 +6,7 @@ use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Symfony\Component\Routing\Exception\MissingMandatoryParametersException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Torr\Rad\Entity\Interfaces\EntityInterface;
+use Torr\Rad\Entity\EntityInterface;
 
 /**
  * A route configuration VO, that defers the actual generation of the route to a later point.

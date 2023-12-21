@@ -1,34 +1,29 @@
 <?php declare(strict_types=1);
 
-namespace Torr\Rad\Entity\Traits;
+namespace Torr\Rad\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use function Symfony\Component\Clock\now;
 
 /**
- * Base trait that adds time created + modified for entities
+ * Base trait for any entity that is modifiable
+ *
+ * Implement {@see EntityInterface} in your entity as well.
  */
-trait TimestampsTrait
+trait ModifiableEntityFieldsTrait
 {
-	/**
-	 * @ORM\Column(name="time_created", type="datetimetz_immutable")
-	 */
-	#[ORM\Column(name: "time_created", type: "datetimetz_immutable")]
-	private \DateTimeImmutable $timeCreated;
+	use EntityFieldsTrait;
 
 	/**
+	 *
 	 */
 	#[ORM\Column(name: "time_modified", type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
 	private ?\DateTimeImmutable $timeModified = null;
 
-	/**
-	 */
-	public function getTimeCreated () : \DateTimeImmutable
-	{
-		return $this->timeCreated;
-	}
 
 	/**
+	 *
 	 */
 	public function getTimeModified () : ?\DateTimeImmutable
 	{
@@ -36,10 +31,11 @@ trait TimestampsTrait
 	}
 
 	/**
+	 *
 	 */
 	public function markAsModified () : void
 	{
-		$this->timeModified = new \DateTimeImmutable();
+		$this->timeModified = now();
 	}
 
 	/**
