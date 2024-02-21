@@ -1,3 +1,9 @@
+3.0.2
+=====
+
+* (improvement) Test for Doctrine ORM v3.
+
+
 3.0.1
 =====
 
