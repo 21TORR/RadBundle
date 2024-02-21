@@ -11,16 +11,16 @@
 	],
 	"homepage": "https://github.com/21TORR/RadBundle",
 	"require": {
-		"php": ">= 8.2",
+		"php": ">= 8.3",
 		"ext-json": "*",
-		"21torr/bundle-helpers": "^2.1",
+		"21torr/bundle-helpers": "^2.2",
 		"21torr/html-builder": "^2.1",
 		"psr/log": "^3.0",
-		"symfony/dependency-injection": "^6.2",
+		"symfony/dependency-injection": "^6.4 || ^7.0",
 		"symfony/deprecation-contracts": "^3.4",
-		"symfony/framework-bundle": "^6.4",
-		"symfony/http-foundation": "^6.4",
-		"symfony/http-kernel": "^6.4"
+		"symfony/framework-bundle": "^6.4 || ^7.0",
+		"symfony/http-foundation": "^6.4 || ^7.0",
+		"symfony/http-kernel": "^6.4 || ^7.0"
 	},
 	"require-dev": {
 		"bamarni/composer-bin-plugin": "^1.8",
@@ -28,12 +28,12 @@
 		"doctrine/orm": "^2.16",
 		"phpunit/phpunit": "^9.6",
 		"roave/security-advisories": "dev-latest",
-		"symfony/console": "^6.4",
-		"symfony/form": "^6.4",
-		"symfony/phpunit-bridge": "^6.4",
-		"symfony/routing": "^6.4",
-		"symfony/security-bundle": "^6.4",
-		"symfony/translation": "^6.4",
+		"symfony/console": "^7.0",
+		"symfony/form": "^7.0",
+		"symfony/phpunit-bridge": "^7.0",
+		"symfony/routing": "^7.0",
+		"symfony/security-bundle": "^7.0",
+		"symfony/translation": "^7.0",
 		"twig/twig": "^3.8"
 	},
 	"suggest": {
@@ -63,25 +63,27 @@
 		"sort-packages": true
 	},
 	"extra": {
+		"bamarni-bin": {
+			"bin-links": false,
+			"forward-command": true
+		},
 		"branch-alias": {
 			"2.x-dev": "2.5.x-dev",
 			"dev-next": "2.5.x-dev"
 		}
 	},
 	"scripts": {
-		"post-install-cmd": [
-			"@composer bin all install --ansi"
-		],
-		"post-update-cmd": [
-			"@composer bin all update --ansi"
+		"fix-lint": [
+			"vendor-bin/cs-fixer/vendor/bin/php-cs-fixer fix --diff --config vendor-bin/cs-fixer/vendor/21torr/php-cs-fixer/.php-cs-fixer.dist.php --no-interaction --ansi",
+			"@composer bin c-norm normalize \"$(pwd)/composer.json\"  --indent-style tab --indent-size 1 --ansi"
 		],
 		"lint": [
-			"@composer bin c-norm normalize \"$(pwd)/composer.json\" --indent-style tab --indent-size 1 --dry-run --ansi",
-			"php-cs-fixer fix --diff --config vendor-bin/cs-fixer/vendor/21torr/php-cs-fixer/.php-cs-fixer.dist.php --dry-run --no-interaction --ansi"
+			"@composer bin c-norm normalize \"$(pwd)/composer.json\"  --indent-style tab --indent-size 1 --dry-run --ansi",
+			"vendor-bin/cs-fixer/vendor/bin/php-cs-fixer fix --diff --config vendor-bin/cs-fixer/vendor/21torr/php-cs-fixer/.php-cs-fixer.dist.php --dry-run --no-interaction --ansi"
 		],
 		"test": [
 			"phpunit",
-			"phpstan analyze -c phpstan.neon . --ansi"
+			"vendor-bin/test/vendor/bin/phpstan analyze -c phpstan.neon . --ansi"
 		]
 	}
 }
