@@ -11,7 +11,7 @@ final class ApiResponseNormalizer
 	{
 		return \array_filter(
 			[
-				"ok" => $apiResponse->ok,
+				"ok" => $apiResponse->isOk(),
 				"data" => $apiResponse->data,
 				"error" => $apiResponse->error,
 			],

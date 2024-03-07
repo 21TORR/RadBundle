@@ -13,7 +13,7 @@ class ApiResponseNormalizerTest extends TestCase
 	 */
 	public function testMinimal () : void
 	{
-		$apiResponse = new ApiResponse(false);
+		$apiResponse = new ApiResponse(400);
 		$normalizer = new ApiResponseNormalizer();
 
 		self::assertEquals([
@@ -27,7 +27,7 @@ class ApiResponseNormalizerTest extends TestCase
 	public function testMaximal () : void
 	{
 		$apiResponse = (new ApiResponse(
-			true,
+			200,
 			["o" => "hai"],
 		))
 			->withError("error message");
