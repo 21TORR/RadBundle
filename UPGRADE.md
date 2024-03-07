@@ -1,3 +1,10 @@
+3.x to 4.0
+==========
+
+* Passing a `bool` to the constructor of `ApiResponse` was removed, pass a status code instead.
+* The method `ApiResponse::withStatusCode()` was removed. Pass the status code in the constructor instead.
+
+
 2.x to 3.0
 ==========
 

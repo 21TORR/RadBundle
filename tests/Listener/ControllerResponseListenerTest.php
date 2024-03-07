@@ -19,7 +19,7 @@ class ControllerResponseListenerTest extends TestCase
 	 */
 	public function testIntegration () : void
 	{
-		$event = $this->createEvent(new ApiResponse(true));
+		$event = $this->createEvent(new ApiResponse(200));
 
 		$listener = new ControllerResponseListener(new ApiResponseNormalizer());
 		$listener->onView($event);
@@ -46,9 +46,9 @@ class ControllerResponseListenerTest extends TestCase
 	 */
 	public function provideStatusCode () : iterable
 	{
-		yield [200, new ApiResponse(true)];
-		yield [400, new ApiResponse(false)];
-		yield [418, (new ApiResponse(false))->withStatusCode(418)];
+		yield [200, new ApiResponse(200)];
+		yield [400, new ApiResponse(400)];
+		yield [418, new ApiResponse(418)];
 	}
 
 	/**
