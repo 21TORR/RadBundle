@@ -1,4 +1,4 @@
-3.1.0 (unreleased)
+3.1.0
 =====
 
 * (deprecation) Deprecate passing a `bool` to the constructor of `ApiResponse`.
