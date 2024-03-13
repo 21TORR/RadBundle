@@ -3,6 +3,7 @@
 
 * (deprecation) Deprecate passing a `bool` to the constructor of `ApiResponse`.
 * (feature) Enforce passing an explicit status code to the constructor of `ApiReponse`.
+* (feature) Add `EnumValue` helper.
 
 3.0.2
 =====
