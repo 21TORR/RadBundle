@@ -29,6 +29,8 @@ class ApiResponse
 
 	/**
 	 * @return $this
+	 *
+	 * @deprecated Calling ApiResponse::withStatusCode() is deprecated, pass the status code in the constructor instead.
 	 */
 	public function withStatusCode (int $statusCode) : self
 	{

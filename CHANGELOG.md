@@ -1,3 +1,9 @@
+3.1.1
+=====
+
+* (improvement) Mark method as deprecated in PHPDoc as well.
+
+
 3.1.0
 =====
 
