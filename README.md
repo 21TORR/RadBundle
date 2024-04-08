@@ -5,7 +5,7 @@ A bundle for rapid application development, that implements features, that are c
 
 Sprinkled with conventions and opinions as used by 21TORR.
 
-> 📚 [**Read the docs**](https://21torr-docs.fly.dev/docs/php/symfony/rad)
+> 📚 [**Read the docs**](https://21torr-docs.pages.dev/docs/php/symfony/rad)
 
 
 Development
