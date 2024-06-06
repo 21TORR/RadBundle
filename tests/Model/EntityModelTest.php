@@ -6,9 +6,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
 use Tests\Torr\Rad\Fixtures\ExampleEntity;
 use Torr\Rad\Entity\EntityInterface;
-use Torr\Rad\Entity\ModifiableEntityFieldsTrait;
 use Torr\Rad\Model\EntityModel;
 
+/**
+ * @internal
+ */
 final class EntityModelTest extends TestCase
 {
 	/**
@@ -24,10 +26,9 @@ final class EntityModelTest extends TestCase
 			->method("persist")
 			->with($entity);
 
-		$model = new class ($manager) extends EntityModel {};
+		$model = new class($manager) extends EntityModel {};
 		$model->add($entity);
 	}
-
 
 	/**
 	 * Tests integration of {@see EntityModel::update()} method
@@ -35,7 +36,7 @@ final class EntityModelTest extends TestCase
 	public function testUpdate () : void
 	{
 		$manager = $this->createMock(EntityManagerInterface::class);
-		$model = new class ($manager) extends EntityModel {};
+		$model = new class($manager) extends EntityModel {};
 
 		// test with timestamps
 		$entityWithTimestamps = $this->createMock(ExampleEntity::class);
@@ -48,7 +49,6 @@ final class EntityModelTest extends TestCase
 		$model->update($this->createMock(EntityInterface::class));
 		self::assertTrue(true, "should not have crashed");
 	}
-
 
 	/**
 	 * Tests integration of {@see EntityModel::remove()} method
@@ -64,10 +64,9 @@ final class EntityModelTest extends TestCase
 			->method("remove")
 			->with($entity);
 
-		$model = new class ($manager) extends EntityModel {};
+		$model = new class($manager) extends EntityModel {};
 		$model->remove($entity);
 	}
-
 
 	/**
 	 * Tests integration of {@see EntityModel::flush()} method
@@ -80,7 +79,7 @@ final class EntityModelTest extends TestCase
 			->expects(self::once())
 			->method("flush");
 
-		$model = new class ($manager) extends EntityModel {};
+		$model = new class($manager) extends EntityModel {};
 		$model->flush();
 	}
 }

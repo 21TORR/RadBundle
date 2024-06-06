@@ -5,10 +5,13 @@ namespace Tests\Torr\Rad\Doctrine;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\UnitOfWork;
 use Doctrine\Persistence\ManagerRegistry;
-use Torr\Rad\Doctrine\DoctrineChangeChecker;
 use PHPUnit\Framework\TestCase;
+use Torr\Rad\Doctrine\DoctrineChangeChecker;
 
-class DoctrineChangeCheckerTest extends TestCase
+/**
+ * @internal
+ */
+final class DoctrineChangeCheckerTest extends TestCase
 {
 	/**
 	 *
@@ -93,7 +96,6 @@ class DoctrineChangeCheckerTest extends TestCase
 		self::assertSame($expected, $checker->hasContentChanged());
 	}
 
-
 	public static function provideChangesets () : iterable
 	{
 		yield "only time modified" => [false, [
@@ -109,7 +111,6 @@ class DoctrineChangeCheckerTest extends TestCase
 			"timeModified" => [/* ... */],
 		]];
 	}
-
 
 	/**
 	 * @dataProvider provideChangesets

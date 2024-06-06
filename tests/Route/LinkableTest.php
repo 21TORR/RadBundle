@@ -7,10 +7,13 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Tests\Torr\Rad\Fixtures\ExampleEntity;
 use Torr\Rad\Route\Linkable;
 
+/**
+ * @internal
+ */
 final class LinkableTest extends TestCase
 {
-	//region Test `->withParameters()`
-	public function provideWithParameters () : iterable
+	// region Test `->withParameters()`
+	public static function provideWithParameters () : iterable
 	{
 		yield [["a" => 1, "b" => 2], ["a" => 1], ["b" => 2]];
 		yield [["a" => 2], ["a" => 1], ["a" => 2]];
@@ -20,7 +23,6 @@ final class LinkableTest extends TestCase
 		yield [["a" => 1], ["a" => new ExampleEntity(123)], ["a" => 1]];
 		yield [["a" => 234], ["a" => new ExampleEntity(123)], ["a" => new ExampleEntity(234)]];
 	}
-
 
 	/**
 	 * @dataProvider provideWithParameters
@@ -35,15 +37,13 @@ final class LinkableTest extends TestCase
 	}
 	// endregion
 
-
-	//region Test `->normalizeParameters()`
-	public function provideParameterNormalization () : iterable
+	// region Test `->normalizeParameters()`
+	public static function provideParameterNormalization () : iterable
 	{
 		yield [["a" => 1], ["a" => 1]];
 		yield [["a" => 1, "b" => 2], ["a" => 1, "b" => 2]];
 		yield [["a" => 1, "b" => 123], ["a" => 1, "b" => new ExampleEntity(123)]];
 	}
-
 
 	/**
 	 * @dataProvider provideParameterNormalization
@@ -53,14 +53,13 @@ final class LinkableTest extends TestCase
 		$linkable = new Linkable("route", $input);
 		self::assertSame($expected, $linkable->getParameters());
 	}
-	//endregion
+	// endregion
 
-
-	//region Test `::generateUrl()`
+	// region Test `::generateUrl()`
 	/**
 	 *
 	 */
-	public function provideGenerateUrlSimple () : iterable
+	public static function provideGenerateUrlSimple () : iterable
 	{
 		yield ["test", "test"];
 		yield [null, null];
@@ -69,7 +68,7 @@ final class LinkableTest extends TestCase
 	/**
 	 * @dataProvider provideGenerateUrlSimple
 	 */
-	public function testGenerateUrlSimple (?string $expectedUrl, $value) : void
+	public function testGenerateUrlSimple (?string $expectedUrl, string|Linkable|null $value) : void
 	{
 		$urlGenerator = $this->createMock(UrlGeneratorInterface::class);
 		self::assertSame($expectedUrl, Linkable::generateUrlFromValue($value, $urlGenerator));
@@ -96,5 +95,5 @@ final class LinkableTest extends TestCase
 		self::assertSame("url", Linkable::generateUrlFromValue($value, $urlGenerator));
 		self::assertSame("url", $value->generateUrl($urlGenerator));
 	}
-	//endregion
+	// endregion
 }

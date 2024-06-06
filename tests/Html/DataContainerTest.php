@@ -5,7 +5,10 @@ namespace Tests\Torr\Rad\Html;
 use PHPUnit\Framework\TestCase;
 use Torr\Rad\Html\DataContainer;
 
-class DataContainerTest extends TestCase
+/**
+ * @internal
+ */
+final class DataContainerTest extends TestCase
 {
 	/**
 	 *
@@ -16,10 +19,9 @@ class DataContainerTest extends TestCase
 
 		self::assertSame(
 			'<script class="_data-container example" type="application/json">{"&lt;o&gt;":"hai"}</script>',
-			$dataContainer->renderToHtml(["<o>" => "hai"], "example")
+			$dataContainer->renderToHtml(["<o>" => "hai"], "example"),
 		);
 	}
-
 
 	/**
 	 *
@@ -30,10 +32,9 @@ class DataContainerTest extends TestCase
 
 		self::assertSame(
 			'<script id="example-id" class="_data-container example" type="application/json">{"&lt;o&gt;":"hai"}</script>',
-			$dataContainer->renderToHtml(["<o>" => "hai"], "example", "example-id")
+			$dataContainer->renderToHtml(["<o>" => "hai"], "example", "example-id"),
 		);
 	}
-
 
 	/**
 	 *
@@ -45,7 +46,7 @@ class DataContainerTest extends TestCase
 
 		self::assertSame(
 			'<script id="example-id" class="_data-container example" type="application/json">{"&lt;o&gt;":"hai"}</script>',
-			$result->getContent()
+			$result->getContent(),
 		);
 	}
 }

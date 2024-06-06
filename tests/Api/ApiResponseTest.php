@@ -2,11 +2,14 @@
 
 namespace Tests\Torr\Rad\Api;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 use Torr\Rad\Api\ApiResponse;
-use PHPUnit\Framework\TestCase;
 
-class ApiResponseTest extends TestCase
+/**
+ * @internal
+ */
+final class ApiResponseTest extends TestCase
 {
 	use ExpectDeprecationTrait;
 
@@ -18,7 +21,6 @@ class ApiResponseTest extends TestCase
 		self::assertTrue((new ApiResponse(202))->isOk());
 		self::assertFalse((new ApiResponse(418))->isOk());
 	}
-
 
 	/**
 	 * @group legacy

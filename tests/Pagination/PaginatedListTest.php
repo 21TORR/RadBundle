@@ -6,6 +6,9 @@ use PHPUnit\Framework\TestCase;
 use Torr\Rad\Pagination\PaginatedList;
 use Torr\Rad\Pagination\Pagination;
 
+/**
+ * @internal
+ */
 final class PaginatedListTest extends TestCase
 {
 	/**
@@ -14,14 +17,13 @@ final class PaginatedListTest extends TestCase
 	public function testArrayList () : void
 	{
 		$pagination = new Pagination(1, 10, 5);
-		$list = \range(1, 3);
+		$list = range(1, 3);
 
 		$paginatedList = new PaginatedList($list, $pagination);
 
 		self::assertSame($list, $paginatedList->getList());
 		self::assertSame($pagination, $paginatedList->getPagination());
 	}
-
 
 	/**
 	 *
@@ -29,13 +31,12 @@ final class PaginatedListTest extends TestCase
 	public function testIteratorList () : void
 	{
 		$pagination = new Pagination(1, 10, 5);
-		$list = new \ArrayIterator(\range(1, 3));
+		$list = new \ArrayIterator(range(1, 3));
 
 		$paginatedList = new PaginatedList($list, $pagination);
 		self::assertSame($pagination, $paginatedList->getPagination());
 		self::assertSame($list, $paginatedList->getList());
 	}
-
 
 	/**
 	 *
@@ -56,25 +57,23 @@ final class PaginatedListTest extends TestCase
 		self::assertSame($iterable, $paginatedList->getList());
 	}
 
-
 	/**
 	 */
-	public function provideFromArray ()
+	public static function provideCreateFromArray () : iterable
 	{
-		yield [11, 1, 1, 11, \range(0, 10)];
+		yield [11, 1, 1, 11, range(0, 10)];
 		yield [0, 1, 1, 1, []];
 	}
 
-
 	/**
-	 * @dataProvider provideFromArray
+	 * @dataProvider provideCreateFromArray
 	 */
 	public function testCreateFromArray (
 		int $expectedListCount,
 		int $expectedCurrent,
 		int $expectedMaxPage,
 		int $expectedPerPage,
-		array $list
+		array $list,
 	) : void
 	{
 		$list = PaginatedList::fromArray($list);
