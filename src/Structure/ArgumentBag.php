@@ -9,12 +9,12 @@ use Torr\Rad\Exception\Structure\MissingArgumentException;
 /**
  * Stricter version of {@see ParameterBag} for usage in flexible argument lists.
  *
- * @implements \IteratorAggregate<string, array|bool|string|int|float|\UnitEnum|object>
+ * @implements \IteratorAggregate<string, array|bool|string|int|float|object>
  */
 final readonly class ArgumentBag implements \IteratorAggregate, \Countable
 {
 	/**
-	 * @param array<string, array|bool|string|int|float|\UnitEnum|object> $arguments
+	 * @param array<string, array|bool|string|int|float|object> $arguments
 	 */
 	public function __construct (
 		private array $arguments = [],

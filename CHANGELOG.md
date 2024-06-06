@@ -1,3 +1,9 @@
+3.2.1 (unreleased)
+=====
+
+* (internal) Simplify types of `ArgumentBag`.
+
+
 3.2.0
 =====
 
