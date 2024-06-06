@@ -83,7 +83,7 @@
 		],
 		"test": [
 			"simple-phpunit",
-			"vendor-bin/phpstan/vendor/bin/phpstan analyze -c phpstan.neon . --ansi"
+			"vendor-bin/phpstan/vendor/bin/phpstan analyze -c phpstan.neon . --ansi -v"
 		]
 	}
 }
