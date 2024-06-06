@@ -13,16 +13,15 @@ abstract class EntityModel implements ModelInterface
 		protected readonly EntityManagerInterface $entityManager,
 	) {}
 
-
 	/**
 	 * @inheritDoc
 	 */
 	public function add (EntityInterface $entity) : static
 	{
 		$this->entityManager->persist($entity);
+
 		return $this;
 	}
-
 
 	/**
 	 * @inheritDoc
@@ -30,7 +29,7 @@ abstract class EntityModel implements ModelInterface
 	public function update (EntityInterface $entity) : static
 	{
 		// automatic integration for entities that use the TimestampsTrait
-		if (\method_exists($entity, 'markAsModified'))
+		if (method_exists($entity, 'markAsModified'))
 		{
 			$entity->markAsModified();
 		}
@@ -38,16 +37,15 @@ abstract class EntityModel implements ModelInterface
 		return $this;
 	}
 
-
 	/**
 	 * @inheritDoc
 	 */
 	public function remove (EntityInterface $entity) : static
 	{
 		$this->entityManager->remove($entity);
+
 		return $this;
 	}
-
 
 	/**
 	 * @inheritDoc
@@ -55,6 +53,7 @@ abstract class EntityModel implements ModelInterface
 	public function flush () : static
 	{
 		$this->entityManager->flush();
+
 		return $this;
 	}
 }

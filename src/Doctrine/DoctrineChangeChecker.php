@@ -15,7 +15,6 @@ final readonly class DoctrineChangeChecker
 		private ManagerRegistry $managerRegistry,
 	) {}
 
-
 	/**
 	 * Determines whether any content globally in any of the entities (or the entities themselves)
 	 * has changed. Only changing "timeModified" doesn't count as content change.
@@ -28,9 +27,9 @@ final readonly class DoctrineChangeChecker
 
 		if (!$defaultEntityManager instanceof EntityManagerInterface)
 		{
-			throw new InvalidDoctrineChangeCheckException(\sprintf(
+			throw new InvalidDoctrineChangeCheckException(sprintf(
 				"Default manager is no entity manager, but '%s'",
-				\get_debug_type($defaultEntityManager),
+				get_debug_type($defaultEntityManager),
 			));
 		}
 
@@ -54,7 +53,7 @@ final readonly class DoctrineChangeChecker
 			$changes = $unitOfWork->getEntityChangeSet($entity);
 
 			// if only timeModified changed, then nothing in the content changed
-			if (1 === \count($changes) && "timeModified" === \array_key_first($changes))
+			if (1 === \count($changes) && "timeModified" === array_key_first($changes))
 			{
 				continue;
 			}
@@ -64,7 +63,6 @@ final readonly class DoctrineChangeChecker
 
 		return false;
 	}
-
 
 	/**
 	 * Returns the changes of the given entity
@@ -78,12 +76,12 @@ final readonly class DoctrineChangeChecker
 		array $redactFields = [],
 	) : array
 	{
-		$entityClass = \get_class($entity);
+		$entityClass = $entity::class;
 		$entityManager = $this->managerRegistry->getManagerForClass($entityClass);
 
 		if (!$entityManager instanceof EntityManagerInterface)
 		{
-			throw new InvalidDoctrineChangeCheckException(\sprintf(
+			throw new InvalidDoctrineChangeCheckException(sprintf(
 				"Could not fetch entity manager for entity of type '%s'",
 				$entityClass,
 			));

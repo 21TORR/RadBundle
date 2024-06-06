@@ -18,7 +18,6 @@ class DataContainer
 		$this->htmlBuilder = new HtmlBuilder();
 	}
 
-
 	/**
 	 * Renders the HTML of the data container.
 	 */
@@ -34,12 +33,11 @@ class DataContainer
 			"class" => "_data-container {$class}",
 			"type" => "application/json",
 		], [
-			\json_encode($data, \JSON_THROW_ON_ERROR),
+			json_encode($data, \JSON_THROW_ON_ERROR),
 		]);
 
 		return $this->htmlBuilder->build($element);
 	}
-
 
 	/**
 	 * Renders the data container as response.

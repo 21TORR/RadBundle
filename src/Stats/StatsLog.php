@@ -21,7 +21,6 @@ final class StatsLog implements StatsLogInterface
 	/** @var string[] */
 	private array $critical = [];
 
-
 	/**
 	 * Instantiates a new import logger.
 	 *
@@ -42,7 +41,6 @@ final class StatsLog implements StatsLogInterface
 		}
 	}
 
-
 	/**
 	 * Sets a label for a given key.
 	 */
@@ -50,7 +48,6 @@ final class StatsLog implements StatsLogInterface
 	{
 		$this->labels[$key] = [$label, $description];
 	}
-
 
 	/**
 	 * @inheritDoc
@@ -65,7 +62,6 @@ final class StatsLog implements StatsLogInterface
 		$this->counters[$key] += $amount;
 	}
 
-
 	/**
 	 * @inheritDoc
 	 */
@@ -73,7 +69,6 @@ final class StatsLog implements StatsLogInterface
 	{
 		$this->debug[] = $message;
 	}
-
 
 	/**
 	 * @inheritDoc
@@ -83,7 +78,6 @@ final class StatsLog implements StatsLogInterface
 		$this->warnings[] = $message;
 	}
 
-
 	/**
 	 * @inheritDoc
 	 */
@@ -92,7 +86,6 @@ final class StatsLog implements StatsLogInterface
 		$this->critical[] = $message;
 	}
 
-
 	/**
 	 * @inheritDoc
 	 */
@@ -100,7 +93,6 @@ final class StatsLog implements StatsLogInterface
 	{
 		return new SectionStatsLog($this, $prefix);
 	}
-
 
 	/**
 	 * Prepares the SymfonyStyle compatible table output
@@ -114,7 +106,7 @@ final class StatsLog implements StatsLogInterface
 		{
 			if (!\array_key_exists($key, $labels))
 			{
-				$displayLabel = \ucwords(\str_replace("_", " ", $key));
+				$displayLabel = ucwords(str_replace("_", " ", $key));
 				$labels[$key] = [$displayLabel, null];
 			}
 		}
@@ -134,7 +126,6 @@ final class StatsLog implements StatsLogInterface
 		return $rows;
 	}
 
-
 	/**
 	 * Renders the stats (including the log) in the CLI
 	 *
@@ -148,10 +139,11 @@ final class StatsLog implements StatsLogInterface
 			$includeDebug = $io->isVerbose();
 		}
 
-		$rows = \array_map(
+		$rows = array_map(
 			static function (array $row)
 			{
 				$row[0] = "<fg=yellow>{$row[0]}</>";
+
 				return $row;
 			},
 			$this->prepareTableOutput(),

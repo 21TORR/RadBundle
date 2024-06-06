@@ -15,9 +15,8 @@ final class SectionStatsLog implements StatsLogInterface
 	public function __construct (StatsLogInterface $parent, string $prefix)
 	{
 		$this->parent = $parent;
-		$this->prefix = \sprintf("[%s] ", \rtrim($prefix));
+		$this->prefix = sprintf("[%s] ", rtrim($prefix));
 	}
-
 
 	/**
 	 * @inheritDoc
@@ -27,7 +26,6 @@ final class SectionStatsLog implements StatsLogInterface
 		$this->parent->increment($key, $amount);
 	}
 
-
 	/**
 	 * @inheritDoc
 	 */
@@ -35,7 +33,6 @@ final class SectionStatsLog implements StatsLogInterface
 	{
 		$this->parent->debug($this->prefix . $message);
 	}
-
 
 	/**
 	 * @inheritDoc
@@ -45,7 +42,6 @@ final class SectionStatsLog implements StatsLogInterface
 		$this->parent->warning($this->prefix . $message);
 	}
 
-
 	/**
 	 * @inheritDoc
 	 */
@@ -53,7 +49,6 @@ final class SectionStatsLog implements StatsLogInterface
 	{
 		$this->parent->critical($this->prefix . $message);
 	}
-
 
 	/**
 	 * @inheritDoc

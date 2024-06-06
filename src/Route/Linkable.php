@@ -15,7 +15,6 @@ final class Linkable implements LinkableInterface
 {
 	public const REQUIRED = true;
 	public const OPTIONAL = false;
-
 	private array $parameters;
 
 	/**
@@ -30,14 +29,12 @@ final class Linkable implements LinkableInterface
 		$this->parameters = $this->normalizeParameters($parameters);
 	}
 
-
 	/**
 	 */
 	public function getRoute () : string
 	{
 		return $this->route;
 	}
-
 
 	/**
 	 */
@@ -46,14 +43,12 @@ final class Linkable implements LinkableInterface
 		return $this->parameters;
 	}
 
-
 	/**
 	 */
 	public function getReferenceType () : int
 	{
 		return $this->referenceType;
 	}
-
 
 	/**
 	 * Normalizes the parameters.
@@ -75,7 +70,6 @@ final class Linkable implements LinkableInterface
 		return $normalized;
 	}
 
-
 	/**
 	 * Generates the URL.
 	 *
@@ -94,17 +88,16 @@ final class Linkable implements LinkableInterface
 		);
 	}
 
-
 	/**
 	 * Clones the route and merges the given parameters.
 	 */
 	public function withParameters (array $additionalParameters) : self
 	{
 		$clone = clone $this;
-		$clone->parameters = \array_replace($clone->parameters, $this->normalizeParameters($additionalParameters));
+		$clone->parameters = array_replace($clone->parameters, $this->normalizeParameters($additionalParameters));
+
 		return $clone;
 	}
-
 
 	/**
 	 * Generates the url for any given value

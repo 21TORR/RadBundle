@@ -15,14 +15,12 @@ final class FormErrorNormalizer
 	private const GLOBAL_KEY = "__global";
 	private ?TranslatorInterface $translator;
 
-
 	/**
 	 */
 	public function __construct (?TranslatorInterface $translator)
 	{
 		$this->translator = $translator;
 	}
-
 
 	/**
 	 * Adds all validation errors of nested fields to the list of errors.
@@ -36,7 +34,7 @@ final class FormErrorNormalizer
 
 		foreach ($parent->all() as $child)
 		{
-			$key = \ltrim("{$prefix}{$child->getName()}");
+			$key = ltrim("{$prefix}{$child->getName()}");
 
 			/** @var FormError $childError */
 			foreach ($child->getErrors() as $childError)
@@ -49,7 +47,6 @@ final class FormErrorNormalizer
 			$this->normalizeNested($errors, $child, "{$key}_", $translationDomain);
 		}
 	}
-
 
 	/**
 	 * Fetches all validation errors of the form and returns it as nested JSON structure.

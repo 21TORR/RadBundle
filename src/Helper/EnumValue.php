@@ -14,7 +14,6 @@ abstract class EnumValue
 			: $value;
 	}
 
-
 	/**
 	 * Helper to resolve an enum / string / null value to a ?string.
 	 */

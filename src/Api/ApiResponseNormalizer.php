@@ -9,7 +9,7 @@ final class ApiResponseNormalizer
 	 */
 	public function normalize (ApiResponse $apiResponse) : array
 	{
-		return \array_filter(
+		return array_filter(
 			[
 				"ok" => $apiResponse->isOk(),
 				"data" => $apiResponse->data,

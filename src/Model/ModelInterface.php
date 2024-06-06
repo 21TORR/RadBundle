@@ -16,7 +16,6 @@ interface ModelInterface
 	 */
 	public function add (EntityInterface $entity) : static;
 
-
 	/**
 	 * Updates the given entity.
 	 *
@@ -24,14 +23,12 @@ interface ModelInterface
 	 */
 	public function update (EntityInterface $entity) : static;
 
-
 	/**
 	 * Removes the given entity.
 	 *
 	 * @return $this
 	 */
 	public function remove (EntityInterface $entity) : static;
-
 
 	/**
 	 * Flushes all changes (globally) to the database.

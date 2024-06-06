@@ -10,10 +10,9 @@ final class MissingOptionalDependencyException extends \Exception implements Rad
 	public function __construct (string $package, ?\Throwable $previous = null)
 	{
 		parent::__construct(
-			\sprintf("Missing optional dependency: %s", $package),
+			sprintf("Missing optional dependency: %s", $package),
 			0,
 			$previous,
 		);
 	}
-
 }

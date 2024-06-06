@@ -16,10 +16,10 @@ final class MissingArgumentException extends \InvalidArgumentException implement
 	) : static
 	{
 		return new self(
-			\sprintf(
+			sprintf(
 				"Missing argument '%s'. Only keys registered are %s",
 				$missingKey,
-				\implode(", ", $allKeys),
+				implode(", ", $allKeys),
 			),
 			previous: $previous,
 		);

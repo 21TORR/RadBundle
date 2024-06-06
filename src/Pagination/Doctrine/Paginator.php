@@ -27,7 +27,7 @@ final class Paginator
 				->setFirstResult($adjustedPagination->getDatabaseRowOffset())
 				->setMaxResults($pagination->getPerPage());
 
-			$list = \iterator_to_array(new DoctrinePaginator($queryBuilder->getQuery()));
+			$list = iterator_to_array(new DoctrinePaginator($queryBuilder->getQuery()));
 		}
 
 		return new PaginatedList($list, $adjustedPagination);
