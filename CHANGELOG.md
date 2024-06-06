@@ -1,7 +1,7 @@
 3.2.0
 =====
 
-* (feature) Add `ArgumentsBag`.
+* (feature) Add `ArgumentBag`.
 
 
 3.1.1
