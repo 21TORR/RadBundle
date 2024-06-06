@@ -35,6 +35,9 @@ final class EntityModelTest extends TestCase
 	 */
 	public function testUpdate () : void
 	{
+		// should not crash
+		$this->expectNotToPerformAssertions();
+
 		$manager = $this->createMock(EntityManagerInterface::class);
 		$model = new class($manager) extends EntityModel {};
 
@@ -47,7 +50,6 @@ final class EntityModelTest extends TestCase
 
 		// test without timestamps
 		$model->update($this->createMock(EntityInterface::class));
-		self::assertTrue(true, "should not have crashed");
 	}
 
 	/**
