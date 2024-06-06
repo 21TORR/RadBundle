@@ -26,11 +26,10 @@
 		"bamarni/composer-bin-plugin": "^1.8",
 		"doctrine/dbal": "^3.0 || ^4.0",
 		"doctrine/orm": "^3.0",
-		"phpunit/phpunit": "^9.6",
 		"roave/security-advisories": "dev-latest",
 		"symfony/console": "^7.0",
 		"symfony/form": "^7.0",
-		"symfony/phpunit-bridge": "^7.0",
+		"symfony/phpunit-bridge": "^7.1",
 		"symfony/routing": "^7.0",
 		"symfony/security-bundle": "^7.0",
 		"symfony/translation": "^7.0",
@@ -82,7 +81,7 @@
 			"vendor-bin/cs-fixer/vendor/bin/php-cs-fixer fix --diff --config vendor-bin/cs-fixer/vendor/21torr/php-cs-fixer/.php-cs-fixer.dist.php --dry-run --no-interaction --ansi"
 		],
 		"test": [
-			"phpunit",
+			"simple-phpunit",
 			"vendor-bin/test/vendor/bin/phpstan analyze -c phpstan.neon . --ansi"
 		]
 	}

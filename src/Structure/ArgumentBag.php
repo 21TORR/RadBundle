@@ -9,7 +9,7 @@ use Torr\Rad\Exception\Structure\MissingArgumentException;
 /**
  * Stricter version of {@see ParameterBag} for usage in flexible argument lists.
  */
-final readonly class ArgumentsBag implements \IteratorAggregate, \Countable
+final readonly class ArgumentBag implements \IteratorAggregate, \Countable
 {
 	/**
 	 * @param array<string, array|bool|string|int|float|\UnitEnum|object> $arguments
@@ -35,9 +35,11 @@ final readonly class ArgumentsBag implements \IteratorAggregate, \Countable
 	}
 
 	/**
-	 *  Returns a required argument
+	 * Returns a required argument
+	 *
+	 * @throws MissingArgumentException if the key does not exist
 	 */
-	public function get (string $key) : array|bool|string|int|float|object
+	public function get (string $key) : array|bool|string|int|float|object|null
 	{
 		if (!\array_key_exists($key, $this->arguments))
 		{
@@ -48,7 +50,7 @@ final readonly class ArgumentsBag implements \IteratorAggregate, \Countable
 	}
 
 	/**
-	 * Returns an optional argument
+	 * Returns an optional argument. Will default to `null` for missing keys.
 	 */
 	public function getOptional (string $key) : array|bool|string|int|float|object|null
 	{
@@ -190,89 +192,6 @@ final readonly class ArgumentsBag implements \IteratorAggregate, \Countable
 		}
 
 		return $value;
-	}
-
-	/**
-	 * Returns a non-optional enum value of the given enum type.
-	 *
-	 * @template T of \BackedEnum
-	 *
-	 * @param class-string<T> $enumClass
-	 *
-	 * @throws InvalidArgumentTypeException if key doesn't exist or value isn't an enum value of the given type
-	 *
-	 * @return T
-	 */
-	public function getEnum (string $key, string $enumClass) : \BackedEnum
-	{
-		$value = $this->get($key);
-
-		if (!\is_int($value) && !\is_string($value))
-		{
-			throw InvalidArgumentTypeException::create(
-				$key,
-				$value,
-				"enum of type {$enumClass}",
-			);
-		}
-
-		try
-		{
-			return $enumClass::from($value);
-		}
-		catch (\ValueError|\TypeError $exception)
-		{
-			throw InvalidArgumentTypeException::create(
-				$key,
-				$value,
-				"enum of type {$enumClass}",
-				$exception,
-			);
-		}
-	}
-
-	/**
-	 * Returns an optional enum value of the given enum type.
-	 *
-	 * @template T of \BackedEnum
-	 *
-	 * @param class-string<T> $enumClass
-	 *
-	 * @throws InvalidArgumentTypeException if value isn't an enum value of the given type / null
-	 *
-	 * @return T|null
-	 */
-	public function getOptionalEnum (string $key, string $enumClass) : ?\BackedEnum
-	{
-		$value = $this->getOptional($key);
-
-		if (null === $value)
-		{
-			return null;
-		}
-
-		if (!\is_int($value) && !\is_string($value))
-		{
-			throw InvalidArgumentTypeException::create(
-				$key,
-				$value,
-				"enum of type {$enumClass} / null",
-			);
-		}
-
-		try
-		{
-			return $enumClass::from($value);
-		}
-		catch (\ValueError|\TypeError $exception)
-		{
-			throw InvalidArgumentTypeException::create(
-				$key,
-				$value,
-				"enum of type {$enumClass} / null",
-				$exception,
-			);
-		}
 	}
 
 	/**
