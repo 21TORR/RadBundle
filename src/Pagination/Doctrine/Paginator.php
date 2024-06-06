@@ -14,6 +14,8 @@ final class Paginator
 {
 	/**
 	 * Fetches the paginated query result content.
+	 *
+	 * @return PaginatedList<object>
 	 */
 	public function fetchPaginated (QueryBuilder $queryBuilder, Pagination $pagination) : PaginatedList
 	{
@@ -27,7 +29,7 @@ final class Paginator
 				->setFirstResult($adjustedPagination->getDatabaseRowOffset())
 				->setMaxResults($pagination->getPerPage());
 
-			$list = \iterator_to_array(new DoctrinePaginator($queryBuilder->getQuery()));
+			$list = iterator_to_array(new DoctrinePaginator($queryBuilder->getQuery()));
 		}
 
 		return new PaginatedList($list, $adjustedPagination);

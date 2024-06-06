@@ -22,13 +22,11 @@ trait EntityFieldsTrait
 	#[ORM\Column(name: "id", type: Types::INTEGER)]
 	private ?int $id = null;
 
-
 	/**
 	 *
 	 */
 	#[ORM\Column(name: "time_created", type: Types::DATETIMETZ_IMMUTABLE)]
 	private \DateTimeImmutable $timeCreated;
-
 
 	/**
 	 *
@@ -38,7 +36,6 @@ trait EntityFieldsTrait
 		return $this->id;
 	}
 
-
 	/**
 	 *
 	 */
@@ -46,7 +43,6 @@ trait EntityFieldsTrait
 	{
 		return null === $this->id;
 	}
-
 
 	/**
 	 *

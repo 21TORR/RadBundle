@@ -6,6 +6,9 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Torr\Rad\Stats\StatsLog;
 
+/**
+ * @internal
+ */
 final class StatsLogTest extends TestCase
 {
 	/**
@@ -55,7 +58,6 @@ final class StatsLogTest extends TestCase
 		$this->assertStatsLog($stats, [], null);
 	}
 
-
 	/**
 	 *
 	 */
@@ -78,7 +80,6 @@ final class StatsLogTest extends TestCase
 		], null);
 	}
 
-
 	/**
 	 *
 	 */
@@ -99,14 +100,13 @@ final class StatsLogTest extends TestCase
 		], null);
 	}
 
-
 	/**
 	 * Asserts the rendering of the stats log
 	 */
 	private function assertStatsLog (
 		StatsLog $stats,
 		array $expectedTable,
-		?array $expectedListing
+		?array $expectedListing,
 	) : void
 	{
 		$io = $this->createMock(SymfonyStyle::class);

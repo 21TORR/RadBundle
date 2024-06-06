@@ -2,15 +2,18 @@
 
 namespace Tests\Torr\Rad\Structure;
 
+use PHPUnit\Framework\TestCase;
 use Tests\Torr\Rad\Fixtures\ExampleBackedEnum;
 use Tests\Torr\Rad\Fixtures\ExampleEntity;
 use Tests\Torr\Rad\Fixtures\ExampleEnum;
 use Torr\Rad\Exception\Structure\InvalidArgumentTypeException;
 use Torr\Rad\Exception\Structure\MissingArgumentException;
 use Torr\Rad\Structure\ArgumentBag;
-use PHPUnit\Framework\TestCase;
 
-class ArgumentBagTest extends TestCase
+/**
+ * @internal
+ */
+final class ArgumentBagTest extends TestCase
 {
 	/**
 	 *
@@ -73,7 +76,7 @@ class ArgumentBagTest extends TestCase
 
 		foreach ($correctMapping as $key => $getter)
 		{
-			foreach (\array_keys($correctMapping) as $invalidKey)
+			foreach (array_keys($correctMapping) as $invalidKey)
 			{
 				if ($invalidKey === $key)
 				{

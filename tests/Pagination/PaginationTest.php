@@ -5,12 +5,15 @@ namespace Tests\Torr\Rad\Pagination;
 use PHPUnit\Framework\TestCase;
 use Torr\Rad\Pagination\Pagination;
 
+/**
+ * @internal
+ */
 final class PaginationTest extends TestCase
 {
-	//region Test `->getMaxPage()`
+	// region Test `->getMaxPage()`
 	/**
 	 */
-	public function provideMaxPage () : iterable
+	public static function provideMaxPage () : iterable
 	{
 		yield [10, 10, 1];
 		yield [5, 10, 2];
@@ -21,7 +24,6 @@ final class PaginationTest extends TestCase
 		yield [1, 10, 10];
 	}
 
-
 	/**
 	 * @dataProvider provideMaxPage
 	 */
@@ -30,12 +32,12 @@ final class PaginationTest extends TestCase
 		$pagination = new Pagination(1, $perPage, $total);
 		self::assertSame($expectedMaxPage, $pagination->getMaxPage());
 	}
-	//endregion
+	// endregion
 
-	//region Test `->isValid()` + `->getCurrent()`
+	// region Test `->isValid()` + `->getCurrent()`
 	/**
 	 */
-	public function provideValid () : iterable
+	public static function provideValid () : iterable
 	{
 		yield [true, 1, 1, 10, 20];
 		yield [true, 2, 2, 10, 20];
@@ -56,13 +58,12 @@ final class PaginationTest extends TestCase
 		self::assertSame($expectedValid, $pagination->isValid());
 		self::assertSame($expectedCurrent, $pagination->getCurrentPage());
 	}
-	//endregion
+	// endregion
 
-
-	//region Test `->getNextPage()`
+	// region Test `->getNextPage()`
 	/**
 	 */
-	public function provideNext () : iterable
+	public static function provideNext () : iterable
 	{
 		yield [5, 4, 1, 5];
 		yield [2, 1, 1, 5];
@@ -73,24 +74,22 @@ final class PaginationTest extends TestCase
 	/**
 	 * @dataProvider provideNext
 	 */
-	public function testNext (?int $expected, int $current, int $perPage, int $total)
+	public function testNext (?int $expected, int $current, int $perPage, int $total) : void
 	{
 		$pagination = new Pagination($current, $perPage, $total);
 		self::assertSame($expected, $pagination->getNextPage());
 	}
-	//endregion
+	// endregion
 
-
-	//region Test Invalid Construction
+	// region Test Invalid Construction
 	/**
 	 */
-	public function provideInvalidConstruction () : iterable
+	public static function provideInvalidConstruction () : iterable
 	{
 		yield "total < 0" => [1, -1];
 		yield "per page < 1 (= 0)" => [0, 1];
 		yield "per page < 1 (= -1)" => [-1, 1];
 	}
-
 
 	/**
 	 * @dataProvider provideInvalidConstruction
@@ -100,10 +99,9 @@ final class PaginationTest extends TestCase
 		$this->expectException(\InvalidArgumentException::class);
 		new Pagination(1, $perPage, $total);
 	}
-	//endregion
+	// endregion
 
-
-	//region Test `->withNumberOfItems()`
+	// region Test `->withNumberOfItems()`
 	/**
 	 *
 	 */
@@ -122,7 +120,6 @@ final class PaginationTest extends TestCase
 		self::assertFalse($newPagination->isValid());
 	}
 
-
 	/**
 	 * Tests that even an invalid current page is preserved, for when the total number of items change.
 	 */
@@ -136,10 +133,9 @@ final class PaginationTest extends TestCase
 		$newPagination = $pagination->withNumberOfItems(100);
 		self::assertSame(10, $newPagination->getCurrentPage());
 	}
-	//endregion
+	// endregion
 
-
-	//region Test `->toArray()`
+	// region Test `->toArray()`
 	/**
 	 *
 	 */
@@ -147,7 +143,7 @@ final class PaginationTest extends TestCase
 	{
 		$pagination = new Pagination(2, 5, 11);
 
-		self::assertEquals([
+		self::assertSame([
 			"current" => 2,
 			"min" => 1,
 			"max" => 3,
@@ -158,13 +154,12 @@ final class PaginationTest extends TestCase
 			"valid" => true,
 		], $pagination->toArray());
 	}
-	//endregion
+	// endregion
 
-
-	//region Test `->getDatabaseRowOffset()`
+	// region Test `->getDatabaseRowOffset()`
 	/**
 	 */
-	public function provideDatabaseRowOffset () : iterable
+	public static function provideDatabaseRowOffset () : iterable
 	{
 		yield [0, 0, 5, 0];
 		yield [0, 0, 5, 20];
@@ -181,5 +176,5 @@ final class PaginationTest extends TestCase
 
 		self::assertSame($expected, $pagination->getDatabaseRowOffset());
 	}
-	//endregion
+	// endregion
 }

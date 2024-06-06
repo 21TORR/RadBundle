@@ -6,10 +6,12 @@ final class ApiResponseNormalizer
 {
 	/**
 	 * Normalizes the given API response
+	 *
+	 * @return array{"ok": bool, "data"?: mixed, "error"?: string}
 	 */
 	public function normalize (ApiResponse $apiResponse) : array
 	{
-		return \array_filter(
+		return array_filter(
 			[
 				"ok" => $apiResponse->isOk(),
 				"data" => $apiResponse->data,

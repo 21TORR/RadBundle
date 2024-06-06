@@ -11,7 +11,6 @@ class RadTwigExtension extends AbstractExtension
 {
 	private DataContainer $dataContainer;
 
-
 	/**
 	 */
 	public function __construct (DataContainer $dataContainer)
@@ -19,21 +18,24 @@ class RadTwigExtension extends AbstractExtension
 		$this->dataContainer = $dataContainer;
 	}
 
-
 	/**
 	 * Appends the given string value to the $array $key (and creates the key if it didn't exist)
+	 *
+	 * @param array<array-key, string> $array
+	 *
+	 * @return array<array-key, string>
 	 */
 	public function appendToArrayKey (array $array, string $key, string $value) : array
 	{
 		$current = $array[$key] ?? "";
-		$array[$key] = \trim("{$current} {$value}");
+		$array[$key] = trim("{$current} {$value}");
+
 		return $array;
 	}
 
-
 	/**
-	 * @inheritDoc
 	 */
+	#[\Override]
 	public function getFunctions () : array
 	{
 		return [
@@ -41,14 +43,13 @@ class RadTwigExtension extends AbstractExtension
 		];
 	}
 
-
 	/**
-	 * @inheritDoc
 	 */
+	#[\Override]
 	public function getFilters () : array
 	{
 		return [
-			new TwigFilter("appendToArrayKey", [$this, "appendToArrayKey"]),
+			new TwigFilter("appendToArrayKey", $this->appendToArrayKey(...)),
 		];
 	}
 }

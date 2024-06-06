@@ -6,7 +6,10 @@ use PHPUnit\Framework\TestCase;
 use Torr\Rad\Html\DataContainer;
 use Torr\Rad\Twig\RadTwigExtension;
 
-class RadTwigExtensionTest extends TestCase
+/**
+ * @internal
+ */
+final class RadTwigExtensionTest extends TestCase
 {
 	public function testAppendToArray () : void
 	{
@@ -18,7 +21,6 @@ class RadTwigExtensionTest extends TestCase
 		self::assertSame("old new", $extension->appendToArrayKey($array, "existing", "new")["existing"]);
 		self::assertSame("new", $extension->appendToArrayKey($array, "missing", "new")["missing"]);
 	}
-
 
 	/**
 	 * Tests that the exported names didn't change
@@ -48,9 +50,9 @@ class RadTwigExtensionTest extends TestCase
 			$foundFilters[] = $filter->getName();
 		}
 
-		self::assertEmpty(\array_diff($expectedFunctions, $foundFunctions));
-		self::assertEmpty(\array_diff($foundFunctions, $expectedFunctions));
-		self::assertEmpty(\array_diff($expectedFilters, $foundFilters));
-		self::assertEmpty(\array_diff($foundFilters, $expectedFilters));
+		self::assertEmpty(array_diff($expectedFunctions, $foundFunctions));
+		self::assertEmpty(array_diff($foundFunctions, $expectedFunctions));
+		self::assertEmpty(array_diff($expectedFilters, $foundFilters));
+		self::assertEmpty(array_diff($foundFilters, $expectedFilters));
 	}
 }

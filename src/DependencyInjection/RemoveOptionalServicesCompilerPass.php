@@ -14,7 +14,7 @@ final class RemoveOptionalServicesCompilerPass implements CompilerPassInterface
 	 */
 	public function process (ContainerBuilder $container) : void
 	{
-		if (!\class_exists(RoleHierarchyVoter::class))
+		if (!class_exists(RoleHierarchyVoter::class))
 		{
 			$container->removeDefinition(AbilitiesVoter::class);
 		}

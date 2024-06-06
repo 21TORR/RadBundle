@@ -2,11 +2,14 @@
 
 namespace Tests\Torr\Rad\Api;
 
-use Torr\Rad\Api\ApiResponse;
 use PHPUnit\Framework\TestCase;
+use Torr\Rad\Api\ApiResponse;
 use Torr\Rad\Api\ApiResponseNormalizer;
 
-class ApiResponseNormalizerTest extends TestCase
+/**
+ * @internal
+ */
+final class ApiResponseNormalizerTest extends TestCase
 {
 	/**
 	 *
@@ -16,7 +19,7 @@ class ApiResponseNormalizerTest extends TestCase
 		$apiResponse = new ApiResponse(400);
 		$normalizer = new ApiResponseNormalizer();
 
-		self::assertEquals([
+		self::assertSame([
 			"ok" => false,
 		], $normalizer->normalize($apiResponse));
 	}
@@ -33,7 +36,7 @@ class ApiResponseNormalizerTest extends TestCase
 			->withError("error message");
 		$normalizer = new ApiResponseNormalizer();
 
-		self::assertEquals([
+		self::assertSame([
 			"ok" => true,
 			"data" => ["o" => "hai"],
 			"error" => "error message",

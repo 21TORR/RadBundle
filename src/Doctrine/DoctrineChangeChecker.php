@@ -3,7 +3,6 @@
 namespace Torr\Rad\Doctrine;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\PersistentCollection;
 use Doctrine\Persistence\ManagerRegistry;
 use Torr\Rad\Exception\Doctrine\InvalidDoctrineChangeCheckException;
 
@@ -14,7 +13,6 @@ final readonly class DoctrineChangeChecker
 	public function __construct (
 		private ManagerRegistry $managerRegistry,
 	) {}
-
 
 	/**
 	 * Determines whether any content globally in any of the entities (or the entities themselves)
@@ -28,9 +26,9 @@ final readonly class DoctrineChangeChecker
 
 		if (!$defaultEntityManager instanceof EntityManagerInterface)
 		{
-			throw new InvalidDoctrineChangeCheckException(\sprintf(
+			throw new InvalidDoctrineChangeCheckException(sprintf(
 				"Default manager is no entity manager, but '%s'",
-				\get_debug_type($defaultEntityManager),
+				get_debug_type($defaultEntityManager),
 			));
 		}
 
@@ -54,7 +52,7 @@ final readonly class DoctrineChangeChecker
 			$changes = $unitOfWork->getEntityChangeSet($entity);
 
 			// if only timeModified changed, then nothing in the content changed
-			if (1 === \count($changes) && "timeModified" === \array_key_first($changes))
+			if (1 === \count($changes) && "timeModified" === array_key_first($changes))
 			{
 				continue;
 			}
@@ -65,25 +63,24 @@ final readonly class DoctrineChangeChecker
 		return false;
 	}
 
-
 	/**
 	 * Returns the changes of the given entity
 	 *
 	 * @param string[] $redactFields If present, these fields values will be overwritten with "(redacted)"
 	 *
-	 * @return array<string, array{"old": mixed, "new": mixed}|PersistentCollection>
+	 * @return array<string, array{"old": mixed, "new": mixed}>
 	 */
 	public function getEntityChanges (
 		object $entity,
 		array $redactFields = [],
 	) : array
 	{
-		$entityClass = \get_class($entity);
+		$entityClass = $entity::class;
 		$entityManager = $this->managerRegistry->getManagerForClass($entityClass);
 
 		if (!$entityManager instanceof EntityManagerInterface)
 		{
-			throw new InvalidDoctrineChangeCheckException(\sprintf(
+			throw new InvalidDoctrineChangeCheckException(sprintf(
 				"Could not fetch entity manager for entity of type '%s'",
 				$entityClass,
 			));

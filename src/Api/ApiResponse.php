@@ -21,30 +21,31 @@ class ApiResponse
 		}
 		else
 		{
-			\trigger_deprecation("21torr/rad", "3.1.0", "Passing a bool as first value to ApiResponse is deprecated. Pass the status code instead.");
+			// @phpstan-ignore-next-line todoBy.sfDeprecation
+			trigger_deprecation("21torr/rad", "3.1.0", "Passing a bool as first value to ApiResponse is deprecated. Pass the status code instead.");
 			$this->statusCode = $statusCode ? 200 : 400;
 		}
 	}
 
-
 	/**
 	 * @return $this
 	 *
-	 * @deprecated Calling ApiResponse::withStatusCode() is deprecated, pass the status code in the constructor instead.
+	 * @deprecated calling ApiResponse::withStatusCode() is deprecated, pass the status code in the constructor instead
 	 */
 	public function withStatusCode (int $statusCode) : self
 	{
 		// @todo remove method in v4
-		\trigger_deprecation(
+		// @phpstan-ignore-next-line todoBy.sfDeprecation
+		trigger_deprecation(
 			"21torr/rad",
 			"3.1.0",
 			"Calling ApiResponse::withStatusCode() is deprecated, pass the status code in the constructor instead.",
 		);
 
 		$this->statusCode = $statusCode;
+
 		return $this;
 	}
-
 
 	/**
 	 * @return $this
@@ -52,9 +53,9 @@ class ApiResponse
 	public function withError (?string $error) : self
 	{
 		$this->error = $error;
+
 		return $this;
 	}
-
 
 	/**
 	 *

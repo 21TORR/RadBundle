@@ -2,6 +2,7 @@
 
 namespace Tests\Torr\Rad\Listener;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
@@ -10,9 +11,11 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Torr\Rad\Api\ApiResponse;
 use Torr\Rad\Api\ApiResponseNormalizer;
 use Torr\Rad\Listener\ControllerResponseListener;
-use PHPUnit\Framework\TestCase;
 
-class ControllerResponseListenerTest extends TestCase
+/**
+ * @internal
+ */
+final class ControllerResponseListenerTest extends TestCase
 {
 	/**
 	 *
@@ -40,11 +43,10 @@ class ControllerResponseListenerTest extends TestCase
 		self::assertNull($event->getResponse());
 	}
 
-
 	/**
 	 *
 	 */
-	public function provideStatusCode () : iterable
+	public static function provideStatusCode () : iterable
 	{
 		yield [200, new ApiResponse(200)];
 		yield [400, new ApiResponse(400)];
@@ -62,7 +64,7 @@ class ControllerResponseListenerTest extends TestCase
 		$listener->onView($event);
 
 		$response = $event->getResponse();
-		self::assertInstanceOf(JsonResponse::class, $response);;
+		self::assertInstanceOf(JsonResponse::class, $response);
 		self::assertSame($expectedStatusCode, $response->getStatusCode());
 	}
 

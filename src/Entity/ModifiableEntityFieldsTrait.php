@@ -4,6 +4,7 @@ namespace Torr\Rad\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+
 use function Symfony\Component\Clock\now;
 
 /**
@@ -20,7 +21,6 @@ trait ModifiableEntityFieldsTrait
 	 */
 	#[ORM\Column(name: "time_modified", type: Types::DATETIMETZ_IMMUTABLE, nullable: true)]
 	private ?\DateTimeImmutable $timeModified = null;
-
 
 	/**
 	 *

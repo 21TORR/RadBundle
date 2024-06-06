@@ -21,7 +21,6 @@ final class PaginatedList
 		$this->pagination = $pagination;
 	}
 
-
 	/**
 	 * @phpstan-return iterable<T>
 	 */
@@ -30,7 +29,6 @@ final class PaginatedList
 		return $this->list;
 	}
 
-
 	/**
 	 */
 	public function getPagination () : Pagination
@@ -38,14 +36,20 @@ final class PaginatedList
 		return $this->pagination;
 	}
 
-
 	/**
 	 * Creates a new paginated list that displays the given items on a single page.
+	 *
+	 * @template EntryType
+	 *
+	 * @param EntryType[] $list
+	 *
+	 * @return self<EntryType>
 	 */
 	public static function fromArray (array $list) : self
 	{
 		$total = \count($list);
-		$perPage = \max(1, $total);
+		$perPage = max(1, $total);
+
 		return new self($list, new Pagination(1, $perPage, $total));
 	}
 }

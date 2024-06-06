@@ -17,7 +17,6 @@ final class ControllerResponseListener
 		private readonly ApiResponseNormalizer $apiResponseNormalizer,
 	) {}
 
-
 	/**
 	 */
 	#[AsEventListener(KernelEvents::VIEW)]

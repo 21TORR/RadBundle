@@ -18,7 +18,6 @@ class Pagination
 	private int $perPage;
 	private int $maxPage;
 
-
 	/**
 	 */
 	public function __construct (int $currentPage, int $perPage = 50, int $numberOfItems = 0)
@@ -36,10 +35,8 @@ class Pagination
 		$this->currentPage = $currentPage;
 		$this->numberOfItems = $numberOfItems;
 		$this->perPage = $perPage;
-		$this->maxPage = (int) \max(1, (int) \ceil($numberOfItems / $perPage));
+		$this->maxPage = (int) max(1, (int) ceil($numberOfItems / $perPage));
 	}
-
-
 
 	/**
 	 * Returns the validated and sanitized current page.
@@ -61,14 +58,12 @@ class Pagination
 		return $this->currentPage;
 	}
 
-
 	/**
 	 */
 	public function getMinPage () : int
 	{
 		return 1;
 	}
-
 
 	/**
 	 */
@@ -77,14 +72,12 @@ class Pagination
 		return $this->maxPage;
 	}
 
-
 	/**
 	 */
 	public function getPerPage () : int
 	{
 		return $this->perPage;
 	}
-
 
 	/**
 	 */
@@ -97,7 +90,6 @@ class Pagination
 			: null;
 	}
 
-
 	/**
 	 */
 	public function getPreviousPage () : ?int
@@ -109,14 +101,12 @@ class Pagination
 			: null;
 	}
 
-
 	/**
 	 */
 	public function getNumberOfItems () : int
 	{
 		return $this->numberOfItems;
 	}
-
 
 	/**
 	 * Returns the offset for usage in database calculations.
@@ -127,7 +117,6 @@ class Pagination
 	{
 		return ($this->getCurrentPage() - $this->getMinPage()) * $this->getPerPage();
 	}
-
 
 	/**
 	 */
@@ -145,14 +134,12 @@ class Pagination
 		];
 	}
 
-
 	/**
 	 */
 	public function withNumberOfItems (int $numberOfItems) : self
 	{
 		return new self($this->currentPage, $this->perPage, $numberOfItems);
 	}
-
 
 	/**
 	 * Returns whether the configuration with the current page is valid (so whether the current page is in the

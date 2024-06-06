@@ -2,8 +2,8 @@
 
 namespace Tests\Torr\Rad\Helper;
 
-use Torr\Rad\Helper\EnumValue;
 use PHPUnit\Framework\TestCase;
+use Torr\Rad\Helper\EnumValue;
 
 enum TestEnum : string
 {
@@ -11,13 +11,14 @@ enum TestEnum : string
 }
 
 /**
+ * @internal
  */
-class EnumValueTest extends TestCase
+final class EnumValueTest extends TestCase
 {
 	/**
 	 *
 	 */
-	public function provideTransform () : iterable
+	public static function provideTransform () : iterable
 	{
 		yield [null, null];
 		yield ["test", "test"];

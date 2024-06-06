@@ -8,6 +8,8 @@ use Torr\Rad\Exception\Structure\MissingArgumentException;
 
 /**
  * Stricter version of {@see ParameterBag} for usage in flexible argument lists.
+ *
+ * @implements \IteratorAggregate<string, array|bool|string|int|float|\UnitEnum|object>
  */
 final readonly class ArgumentBag implements \IteratorAggregate, \Countable
 {
@@ -79,7 +81,7 @@ final readonly class ArgumentBag implements \IteratorAggregate, \Countable
 	 *
 	 * @throws InvalidArgumentTypeException if key doesn't exist or value isn't a string / null
 	 */
-	public function getOptionalString (string $key) : string|null
+	public function getOptionalString (string $key) : ?string
 	{
 		$value = $this->getOptional($key);
 
@@ -107,7 +109,6 @@ final readonly class ArgumentBag implements \IteratorAggregate, \Countable
 
 		return $value;
 	}
-
 
 	/**
 	 * Returns an optional int argument.
@@ -201,15 +202,15 @@ final readonly class ArgumentBag implements \IteratorAggregate, \Countable
 	 *
 	 * @param class-string<T> $className
 	 *
-	 * @throws InvalidArgumentTypeException if key doesn't exist or value isn't an object of the given type
-	 *
 	 * @return T
+	 *
+	 * @throws InvalidArgumentTypeException if key doesn't exist or value isn't an object of the given type
 	 */
 	public function getObject (string $key, string $className) : object
 	{
 		$value = $this->get($key);
 
-		if (!\is_object($value) || !\is_a($value, $className))
+		if (!\is_object($value) || !is_a($value, $className))
 		{
 			throw InvalidArgumentTypeException::create(
 				$key,
@@ -228,9 +229,9 @@ final readonly class ArgumentBag implements \IteratorAggregate, \Countable
 	 *
 	 * @param class-string<T> $className
 	 *
-	 * @throws InvalidArgumentTypeException if value isn't an object of the given type / null
-	 *
 	 * @return T|null
+	 *
+	 * @throws InvalidArgumentTypeException if value isn't an object of the given type / null
 	 */
 	public function getOptionalObject (string $key, string $className) : ?object
 	{
@@ -241,7 +242,7 @@ final readonly class ArgumentBag implements \IteratorAggregate, \Countable
 			return null;
 		}
 
-		if (!\is_object($value) || !\is_a($value, $className))
+		if (!\is_object($value) || !is_a($value, $className))
 		{
 			throw InvalidArgumentTypeException::create(
 				$key,
@@ -310,6 +311,4 @@ final readonly class ArgumentBag implements \IteratorAggregate, \Countable
 	{
 		return \count($this->arguments);
 	}
-
-
 }

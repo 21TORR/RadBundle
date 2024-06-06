@@ -27,13 +27,14 @@ abstract class BaseController extends AbstractController
 		return $this->container->get($service);
 	}
 
-
 	/**
 	 * Normalizes the errors from the given form.
 	 *
 	 * @protected
 	 *
 	 * @todo change to real `protected` in v3.0
+	 *
+	 * @return array<string, string[]>
 	 */
 	public function normalizeFormErrors (FormInterface $form, string $translationDomain = "validators") : array
 	{
@@ -71,7 +72,7 @@ abstract class BaseController extends AbstractController
 			throw new InvalidJsonRequestException("Expected JSON request content type.", 415);
 		}
 
-		$raw = \trim((string) $request->getContent());
+		$raw = trim((string) $request->getContent());
 
 		if ("" === $raw)
 		{
@@ -80,12 +81,12 @@ abstract class BaseController extends AbstractController
 
 		try
 		{
-			$data = \json_decode($raw, true, 512, \JSON_THROW_ON_ERROR);
+			$data = json_decode($raw, true, 512, \JSON_THROW_ON_ERROR);
 
 			if (!\is_array($data))
 			{
 				throw new InvalidJsonRequestException(
-					\sprintf("Invalid top level type in JSON payload. Must be array, is %s", \gettype($data)),
+					sprintf("Invalid top level type in JSON payload. Must be array, is %s", \gettype($data)),
 					400,
 				);
 			}
@@ -95,13 +96,12 @@ abstract class BaseController extends AbstractController
 		catch (\JsonException $exception)
 		{
 			throw new InvalidJsonRequestException(
-				\sprintf("Parsing JSON payload failed: %s", $exception->getMessage()),
+				sprintf("Parsing JSON payload failed: %s", $exception->getMessage()),
 				400,
 				$exception,
 			);
 		}
 	}
-
 
 	/**
 	 * @inheritDoc
