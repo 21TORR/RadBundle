@@ -32,7 +32,7 @@ abstract class BaseController extends AbstractController
 	 *
 	 * @protected
 	 *
-	 * @todo change to real `protected` in v3.0
+	 * @todo change to real `protected` in v4.0
 	 *
 	 * @return array<string, string[]>
 	 */
@@ -46,7 +46,7 @@ abstract class BaseController extends AbstractController
 	 *
 	 * @protected
 	 *
-	 * @todo change to real `protected` in v3.0
+	 * @todo change to real `protected` in v4.0
 	 */
 	public function getLogger () : LoggerInterface
 	{
@@ -58,7 +58,7 @@ abstract class BaseController extends AbstractController
 	 *
 	 * @protected
 	 *
-	 * @todo change to real `protected` in v3.0
+	 * @todo change to real `protected` in v4.0
 	 */
 	public function fetchJsonRequestBody (Request $request, bool $allowInvalid = false) : array
 	{
