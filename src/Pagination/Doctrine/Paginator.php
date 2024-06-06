@@ -14,6 +14,8 @@ final class Paginator
 {
 	/**
 	 * Fetches the paginated query result content.
+	 *
+	 * @return PaginatedList<object>
 	 */
 	public function fetchPaginated (QueryBuilder $queryBuilder, Pagination $pagination) : PaginatedList
 	{

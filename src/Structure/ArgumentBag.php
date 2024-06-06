@@ -8,6 +8,8 @@ use Torr\Rad\Exception\Structure\MissingArgumentException;
 
 /**
  * Stricter version of {@see ParameterBag} for usage in flexible argument lists.
+ *
+ * @implements \IteratorAggregate<string, array|bool|string|int|float|\UnitEnum|object>
  */
 final readonly class ArgumentBag implements \IteratorAggregate, \Countable
 {

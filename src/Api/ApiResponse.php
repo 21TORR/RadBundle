@@ -21,6 +21,7 @@ class ApiResponse
 		}
 		else
 		{
+			// @phpstan-ignore-next-line todoBy.sfDeprecation
 			trigger_deprecation("21torr/rad", "3.1.0", "Passing a bool as first value to ApiResponse is deprecated. Pass the status code instead.");
 			$this->statusCode = $statusCode ? 200 : 400;
 		}
@@ -34,6 +35,7 @@ class ApiResponse
 	public function withStatusCode (int $statusCode) : self
 	{
 		// @todo remove method in v4
+		// @phpstan-ignore-next-line todoBy.sfDeprecation
 		trigger_deprecation(
 			"21torr/rad",
 			"3.1.0",

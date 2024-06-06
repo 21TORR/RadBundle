@@ -3,7 +3,6 @@
 namespace Torr\Rad\Doctrine;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\PersistentCollection;
 use Doctrine\Persistence\ManagerRegistry;
 use Torr\Rad\Exception\Doctrine\InvalidDoctrineChangeCheckException;
 
@@ -69,7 +68,7 @@ final readonly class DoctrineChangeChecker
 	 *
 	 * @param string[] $redactFields If present, these fields values will be overwritten with "(redacted)"
 	 *
-	 * @return array<string, array{"old": mixed, "new": mixed}|PersistentCollection>
+	 * @return array<string, array{"old": mixed, "new": mixed}>
 	 */
 	public function getEntityChanges (
 		object $entity,

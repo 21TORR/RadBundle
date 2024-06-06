@@ -5,6 +5,8 @@ namespace Tests\Torr\Rad\Fixtures;
 use Torr\Rad\Entity\EntityInterface;
 use Torr\Rad\Entity\ModifiableEntityFieldsTrait;
 
+use function Symfony\Component\Clock\now;
+
 /**
  */
 class ExampleEntity implements EntityInterface
@@ -14,5 +16,6 @@ class ExampleEntity implements EntityInterface
 	public function __construct (?int $id = null)
 	{
 		$this->id = $id;
+		$this->timeCreated = now();
 	}
 }

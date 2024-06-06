@@ -38,6 +38,12 @@ final class PaginatedList
 
 	/**
 	 * Creates a new paginated list that displays the given items on a single page.
+	 *
+	 * @template EntryType
+	 *
+	 * @param EntryType[] $list
+	 *
+	 * @return self<EntryType>
 	 */
 	public static function fromArray (array $list) : self
 	{

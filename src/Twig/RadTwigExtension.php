@@ -20,6 +20,10 @@ class RadTwigExtension extends AbstractExtension
 
 	/**
 	 * Appends the given string value to the $array $key (and creates the key if it didn't exist)
+	 *
+	 * @param array<array-key, string> $array
+	 *
+	 * @return array<array-key, string>
 	 */
 	public function appendToArrayKey (array $array, string $key, string $value) : array
 	{
@@ -30,8 +34,8 @@ class RadTwigExtension extends AbstractExtension
 	}
 
 	/**
-	 * @inheritDoc
 	 */
+	#[\Override]
 	public function getFunctions () : array
 	{
 		return [
@@ -40,12 +44,12 @@ class RadTwigExtension extends AbstractExtension
 	}
 
 	/**
-	 * @inheritDoc
 	 */
+	#[\Override]
 	public function getFilters () : array
 	{
 		return [
-			new TwigFilter("appendToArrayKey", [$this, "appendToArrayKey"]),
+			new TwigFilter("appendToArrayKey", $this->appendToArrayKey(...)),
 		];
 	}
 }

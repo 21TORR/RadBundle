@@ -6,6 +6,8 @@ final class ApiResponseNormalizer
 {
 	/**
 	 * Normalizes the given API response
+	 *
+	 * @return array{"ok": bool, "data"?: mixed, "error"?: string}
 	 */
 	public function normalize (ApiResponse $apiResponse) : array
 	{

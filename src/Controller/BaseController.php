@@ -33,6 +33,8 @@ abstract class BaseController extends AbstractController
 	 * @protected
 	 *
 	 * @todo change to real `protected` in v3.0
+	 *
+	 * @return array<string, string[]>
 	 */
 	public function normalizeFormErrors (FormInterface $form, string $translationDomain = "validators") : array
 	{
