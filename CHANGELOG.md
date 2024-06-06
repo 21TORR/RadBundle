@@ -2,6 +2,7 @@
 =====
 
 * (internal) Simplify types of `ArgumentBag`.
+* (internal) Only ignore a single PHPStan issue for the container helper in `BaseController`.
 
 
 3.2.0

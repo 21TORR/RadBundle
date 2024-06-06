@@ -23,7 +23,7 @@ abstract class BaseController extends AbstractController
 	 */
 	protected function getService (string $service) : object
 	{
-		// @phpstan-ignore-next-line
+		// @phpstan-ignore-next-line return.type (The return value is fine, PHPStan doesn't know the generics)
 		return $this->container->get($service);
 	}
 
