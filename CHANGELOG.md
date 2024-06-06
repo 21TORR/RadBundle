@@ -1,3 +1,9 @@
+3.2.0
+=====
+
+* (feature) Add `ArgumentsBag`.
+
+
 3.1.1
 =====
 

@@ -1,5 +1,7 @@
 includes:
-    - vendor-bin/test/vendor/21torr/php-cs/phpstan/lib.neon
+	- vendor-bin/test/vendor/21torr/php-cs/phpstan/lib.neon
 
 parameters:
-    level: 9
+	level: 9
+	bootstrapFiles:
+		- vendor/bin/.phpunit/phpunit/vendor/autoload.php
