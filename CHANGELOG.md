@@ -3,6 +3,7 @@
 
 * (internal) Simplify types of `ArgumentBag`.
 * (internal) Only ignore a single PHPStan issue for the container helper in `BaseController`.
+* (improvement) Use unsigned `int`s for id fields in the database.
 
 
 3.2.0
