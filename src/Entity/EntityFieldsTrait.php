@@ -19,7 +19,9 @@ trait EntityFieldsTrait
 	 */
 	#[ORM\Id]
 	#[ORM\GeneratedValue(strategy: "AUTO")]
-	#[ORM\Column(name: "id", type: Types::INTEGER)]
+	#[ORM\Column(name: "id", type: Types::INTEGER, options: [
+		"unsigned" => true,
+	])]
 	private ?int $id = null;
 
 	/**
