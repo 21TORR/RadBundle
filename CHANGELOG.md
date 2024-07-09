@@ -1,3 +1,9 @@
+3.2.2
+=====
+
+* (improvement) Make `NotNull` error messages more user-friendly.
+
+
 3.2.1
 =====
 
