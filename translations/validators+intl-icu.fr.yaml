@@ -1,0 +1,2 @@
+# Use NotBlank error message for NotNull errors, as they are more user-friendly
+"This value should not be null.": "Cette valeur ne doit pas être vide."

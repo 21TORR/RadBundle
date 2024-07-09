@@ -1,0 +1,2 @@
+# Use NotBlank error message for NotNull errors, as they are more user-friendly
+"This value should not be null.": "یہ ويليو خالی نہیں ہونی چاہیے"

@@ -1,0 +1,2 @@
+# Use NotBlank error message for NotNull errors, as they are more user-friendly
+"This value should not be null.": "Giá trị không được phép để trống."
