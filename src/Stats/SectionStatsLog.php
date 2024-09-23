@@ -15,7 +15,7 @@ final class SectionStatsLog implements StatsLogInterface
 	public function __construct (StatsLogInterface $parent, string $prefix)
 	{
 		$this->parent = $parent;
-		$this->prefix = sprintf("[%s] ", rtrim($prefix));
+		$this->prefix = \sprintf("[%s] ", rtrim($prefix));
 	}
 
 	/**
