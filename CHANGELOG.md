@@ -2,6 +2,7 @@
 =====
 
 * (improvement) Make `NotNull` error messages more user-friendly.
+* (improvement) Add `ArrayAccess` support to `ArgumentBag`.
 
 
 3.2.1
