@@ -3,6 +3,7 @@
 namespace Torr\Rad\Structure;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
+use Torr\Rad\Exception\Structure\ImmutableDataException;
 use Torr\Rad\Exception\Structure\InvalidArgumentTypeException;
 use Torr\Rad\Exception\Structure\MissingArgumentException;
 
@@ -10,8 +11,9 @@ use Torr\Rad\Exception\Structure\MissingArgumentException;
  * Stricter version of {@see ParameterBag} for usage in flexible argument lists.
  *
  * @implements \IteratorAggregate<string, array|bool|string|int|float|object>
+ * @implements \ArrayAccess<string, array|bool|string|int|float|object>
  */
-final readonly class ArgumentBag implements \IteratorAggregate, \Countable
+final readonly class ArgumentBag implements \IteratorAggregate, \Countable, \ArrayAccess
 {
 	/**
 	 * @param array<string, array|bool|string|int|float|object> $arguments
@@ -296,6 +298,7 @@ final readonly class ArgumentBag implements \IteratorAggregate, \Countable
 		return \array_key_exists($key, $this->arguments);
 	}
 
+	// region IteratorAggregate implementation
 	/**
 	 *
 	 */
@@ -303,7 +306,9 @@ final readonly class ArgumentBag implements \IteratorAggregate, \Countable
 	{
 		return new \ArrayIterator($this->arguments);
 	}
+	// endregion
 
+	// region Countable implementation
 	/**
 	 *
 	 */
@@ -311,4 +316,39 @@ final readonly class ArgumentBag implements \IteratorAggregate, \Countable
 	{
 		return \count($this->arguments);
 	}
+	// endregion
+
+	// region ArrayAccess implementation
+	/**
+	 *
+	 */
+	public function offsetExists (mixed $offset) : bool
+	{
+		return isset($this->arguments[$offset]);
+	}
+
+	/**
+	 *
+	 */
+	public function offsetGet (mixed $offset) : mixed
+	{
+		return $this->arguments[$offset] ?? null;
+	}
+
+	/**
+	 *
+	 */
+	public function offsetSet (mixed $offset, mixed $value) : void
+	{
+		throw new ImmutableDataException("The argument bag is read-only");
+	}
+
+	/**
+	 *
+	 */
+	public function offsetUnset (mixed $offset) : void
+	{
+		throw new ImmutableDataException("The argument bag is read-only");
+	}
+	// endregion
 }

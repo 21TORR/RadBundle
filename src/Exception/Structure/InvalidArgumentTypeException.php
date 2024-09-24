@@ -16,7 +16,7 @@ final class InvalidArgumentTypeException extends \TypeError implements RadExcept
 	) : static
 	{
 		return new self(
-			sprintf(
+			\sprintf(
 				"Invalid argument type for key '%s': expected %s, but was %s",
 				$key,
 				$expected,

@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Tests\Torr\Rad\Fixtures\ExampleBackedEnum;
 use Tests\Torr\Rad\Fixtures\ExampleEntity;
 use Tests\Torr\Rad\Fixtures\ExampleEnum;
+use Torr\Rad\Exception\Structure\ImmutableDataException;
 use Torr\Rad\Exception\Structure\InvalidArgumentTypeException;
 use Torr\Rad\Exception\Structure\MissingArgumentException;
 use Torr\Rad\Structure\ArgumentBag;
@@ -103,6 +104,39 @@ final class ArgumentBagTest extends TestCase
 	{
 		$this->expectException(InvalidArgumentTypeException::class);
 		$getter($key);
+	}
+
+	/**
+	 *
+	 */
+	public function testArrayAccess () : void
+	{
+		$bag = self::createBag();
+
+		self::assertSame($bag["object"], $bag->get("object"));
+		self::assertSame(ExampleEnum::Test, $bag["enum"]);
+	}
+
+	/**
+	 *
+	 */
+	public function testInvalidArraySet () : void
+	{
+		$this->expectException(ImmutableDataException::class);
+		$bag = self::createBag();
+
+		$bag["nope"] = "nope";
+	}
+
+	/**
+	 *
+	 */
+	public function testInvalidArrayUnset () : void
+	{
+		$this->expectException(ImmutableDataException::class);
+		$bag = self::createBag();
+
+		unset($bag["nope"]);
 	}
 
 	/**

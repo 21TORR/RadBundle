@@ -12,7 +12,7 @@ class UnexpectedTypeException extends \InvalidArgumentException implements RadEx
 		?\Throwable $previous = null,
 	) {
 		parent::__construct(
-			sprintf('Expected argument of type %s, "%s" given', $expectedType, get_debug_type($value)),
+			\sprintf('Expected argument of type %s, "%s" given', $expectedType, get_debug_type($value)),
 			0,
 			$previous,
 		);

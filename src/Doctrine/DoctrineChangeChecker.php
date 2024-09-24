@@ -26,7 +26,7 @@ final readonly class DoctrineChangeChecker
 
 		if (!$defaultEntityManager instanceof EntityManagerInterface)
 		{
-			throw new InvalidDoctrineChangeCheckException(sprintf(
+			throw new InvalidDoctrineChangeCheckException(\sprintf(
 				"Default manager is no entity manager, but '%s'",
 				get_debug_type($defaultEntityManager),
 			));
@@ -80,7 +80,7 @@ final readonly class DoctrineChangeChecker
 
 		if (!$entityManager instanceof EntityManagerInterface)
 		{
-			throw new InvalidDoctrineChangeCheckException(sprintf(
+			throw new InvalidDoctrineChangeCheckException(\sprintf(
 				"Could not fetch entity manager for entity of type '%s'",
 				$entityClass,
 			));
