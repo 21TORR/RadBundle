@@ -29,7 +29,7 @@ final class FormErrorNormalizer
 	{
 		if (null === $this->translator)
 		{
-			throw new MissingOptionalDependencyException("symfony/translator");
+			throw new MissingOptionalDependencyException("symfony/translation");
 		}
 
 		foreach ($parent->all() as $child)
