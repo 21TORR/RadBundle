@@ -1,3 +1,9 @@
+3.3.0
+=====
+
+* (feature) Add user-readable error message in `ApiResponse`.
+
+
 3.2.2
 =====
 

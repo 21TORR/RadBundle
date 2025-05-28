@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Translation\Translator;
 use Torr\Rad\Api\ApiResponse;
 use Torr\Rad\Api\ApiResponseNormalizer;
 use Torr\Rad\Listener\ControllerResponseListener;
@@ -24,7 +25,7 @@ final class ControllerResponseListenerTest extends TestCase
 	{
 		$event = $this->createEvent(new ApiResponse(200));
 
-		$listener = new ControllerResponseListener(new ApiResponseNormalizer());
+		$listener = new ControllerResponseListener(new ApiResponseNormalizer(new Translator("de")));
 		$listener->onView($event);
 
 		self::assertInstanceOf(JsonResponse::class, $event->getResponse());
@@ -37,7 +38,7 @@ final class ControllerResponseListenerTest extends TestCase
 	{
 		$event = $this->createEvent(11);
 
-		$listener = new ControllerResponseListener(new ApiResponseNormalizer());
+		$listener = new ControllerResponseListener(new ApiResponseNormalizer(new Translator("de")));
 		$listener->onView($event);
 
 		self::assertNull($event->getResponse());
@@ -60,7 +61,7 @@ final class ControllerResponseListenerTest extends TestCase
 	{
 		$event = $this->createEvent($apiResponse);
 
-		$listener = new ControllerResponseListener(new ApiResponseNormalizer());
+		$listener = new ControllerResponseListener(new ApiResponseNormalizer(new Translator("de")));
 		$listener->onView($event);
 
 		$response = $event->getResponse();

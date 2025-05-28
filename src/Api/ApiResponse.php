@@ -2,10 +2,13 @@
 
 namespace Torr\Rad\Api;
 
+use Symfony\Component\Translation\TranslatableMessage;
+
 class ApiResponse
 {
 	public int $statusCode;
 	public ?string $error = null;
+	public TranslatableMessage|string|null $errorMessage = null;
 
 	/**
 	 */
@@ -48,11 +51,18 @@ class ApiResponse
 	}
 
 	/**
+	 * @param string|null $error        An error code
+	 * @param string|null $errorMessage A user-readable error message
+	 *
 	 * @return $this
 	 */
-	public function withError (?string $error) : self
+	public function withError (
+		?string $error,
+		TranslatableMessage|string|null $errorMessage = null,
+	) : self
 	{
 		$this->error = $error;
+		$this->errorMessage = $errorMessage;
 
 		return $this;
 	}
@@ -63,5 +73,14 @@ class ApiResponse
 	public function isOk () : bool
 	{
 		return $this->statusCode >= 200 && $this->statusCode <= 299;
+	}
+
+	/**
+	 * Sghort
+	 */
+	public static function error (string $errorMessage, int $statusCode = 400) : self
+	{
+		return (new self($statusCode))
+			->withError($errorMessage);
 	}
 }
