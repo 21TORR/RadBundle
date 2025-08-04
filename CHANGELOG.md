@@ -1,3 +1,9 @@
+3.3.1 (unreleased)
+=====
+
+* (improvement) Log raw JSON when fetching the JSON content from a request fails.
+
+
 3.3.0
 =====
 

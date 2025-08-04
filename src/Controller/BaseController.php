@@ -5,6 +5,7 @@ namespace Torr\Rad\Controller;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Exception\JsonException;
 use Symfony\Component\HttpFoundation\Request;
 use Torr\Rad\Exception\Request\InvalidJsonRequestException;
 use Torr\Rad\Form\FormErrorNormalizer;
@@ -72,29 +73,18 @@ abstract class BaseController extends AbstractController
 			throw new InvalidJsonRequestException("Expected JSON request content type.", 415);
 		}
 
-		$raw = trim((string) $request->getContent());
-
-		if ("" === $raw)
-		{
-			return [];
-		}
-
 		try
 		{
-			$data = json_decode($raw, true, 512, \JSON_THROW_ON_ERROR);
-
-			if (!\is_array($data))
-			{
-				throw new InvalidJsonRequestException(
-					\sprintf("Invalid top level type in JSON payload. Must be array, is %s", \gettype($data)),
-					400,
-				);
-			}
-
-			return $data;
+			return $request->getPayload()->all();
 		}
-		catch (\JsonException $exception)
+		catch (JsonException $exception)
 		{
+			$this->getLogger()->error("Parsing JSON payload failed: {message}", [
+				"message" => $exception->getMessage(),
+				"exception" => $exception,
+				"json" => (string) $request->getContent(),
+			]);
+
 			throw new InvalidJsonRequestException(
 				\sprintf("Parsing JSON payload failed: %s", $exception->getMessage()),
 				400,
