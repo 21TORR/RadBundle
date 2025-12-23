@@ -10,13 +10,13 @@ use Torr\Rad\Exception\Structure\MissingArgumentException;
 /**
  * Stricter version of {@see ParameterBag} for usage in flexible argument lists.
  *
- * @implements \IteratorAggregate<string, array|bool|string|int|float|object>
- * @implements \ArrayAccess<string, array|bool|string|int|float|object>
+ * @implements \IteratorAggregate<string, array|bool|string|int|float|object|null>
+ * @implements \ArrayAccess<string, array|bool|string|int|float|object|null>
  */
 final readonly class ArgumentBag implements \IteratorAggregate, \Countable, \ArrayAccess
 {
 	/**
-	 * @param array<string, array|bool|string|int|float|object> $arguments
+	 * @param array<string, array|bool|string|int|float|object|null> $arguments
 	 */
 	public function __construct (
 		private array $arguments = [],

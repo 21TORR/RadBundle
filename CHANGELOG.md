@@ -1,7 +1,10 @@
-3.3.1 (unreleased)
+3.4.0
 =====
 
 * (improvement) Log raw JSON when fetching the JSON content from a request fails.
+* (feature) Add `ImportData` helper VO.
+* (improvement) Add `EntityModel::persist()` as unified `add/edit`.
+* (improvement) Require PHP 8.4+
 
 
 3.3.0

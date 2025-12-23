@@ -48,6 +48,23 @@ abstract class EntityModel implements ModelInterface
 	}
 
 	/**
+	 * If the entity is new, it will "add" it, otherwise it will "update" it
+	 */
+	public function persist (EntityInterface $entity) : static
+	{
+		if ($entity->isNew())
+		{
+			$this->add($entity);
+		}
+		else
+		{
+			$this->update($entity);
+		}
+
+		return $this;
+	}
+
+	/**
 	 * @inheritDoc
 	 */
 	public function flush () : static
