@@ -1,0 +1,49 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Method Torr\\Rad\\Controller\\BaseController\:\:normalizeFormErrors\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Controller/BaseController.php
+
+		-
+			message: '#^Method Torr\\Rad\\Form\\FormErrorNormalizer\:\:normalize\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Form/FormErrorNormalizer.php
+
+		-
+			message: '#^Method Torr\\Rad\\Form\\FormErrorNormalizer\:\:normalizeNested\(\) has parameter \$parent with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			identifier: missingType.generics
+			count: 1
+			path: src/Form/FormErrorNormalizer.php
+
+		-
+			message: '#^Method Torr\\Rad\\Import\\ImportData\:\:getEnum\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: src/Import/ImportData.php
+
+		-
+			message: '#^Method Torr\\Rad\\Pagination\\Doctrine\\Paginator\:\:fetchPaginated\(\) should return Torr\\Rad\\Pagination\\PaginatedList\<object\> but returns Torr\\Rad\\Pagination\\PaginatedList\<mixed\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Pagination/Doctrine/Paginator.php
+
+		-
+			message: '#^Method Torr\\Rad\\Pagination\\PaginatedList\:\:fromArray\(\) should return Torr\\Rad\\Pagination\\PaginatedList\<EntryType\> but returns Torr\\Rad\\Pagination\\PaginatedList\<mixed\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Pagination/PaginatedList.php
+
+		-
+			message: '#^Parameter \#2 \$label of method Torr\\Rad\\Stats\\StatsLog\:\:setLabel\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Stats/StatsLog.php
+
+		-
+			message: '#^Parameter \#3 \$description of method Torr\\Rad\\Stats\\StatsLog\:\:setLabel\(\) expects string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Stats/StatsLog.php
