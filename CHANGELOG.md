@@ -3,6 +3,7 @@
 
 * (improvement) Log raw JSON when fetching the JSON content from a request fails.
 * (feature) Add `ImportData` helper VO.
+* (improvement) Add `EntityModel::persist()` as unified `add/edit`.
 
 
 3.3.0
