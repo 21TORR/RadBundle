@@ -109,13 +109,10 @@ readonly class ImportData implements \IteratorAggregate, \Countable
 	 */
 	public function getOptionalInt (string $path) : ?int
 	{
-		$value = $this->filter($path, \FILTER_VALIDATE_INT, [
-			"flags" => \FILTER_REQUIRE_SCALAR,
-		]);
+		$value = $this->filter($path, "int");
+		\assert(null === $value || is_int($value));
 
-		return null !== $value
-			? (int) $value
-			: null;
+		return $value;
 	}
 	// endregion
 
@@ -137,13 +134,10 @@ readonly class ImportData implements \IteratorAggregate, \Countable
 	 */
 	public function getOptionalFloat (string $path) : ?float
 	{
-		$value = $this->filter($path, \FILTER_VALIDATE_FLOAT, [
-			"flags" => \FILTER_REQUIRE_SCALAR,
-		]);
+		$value = $this->filter($path, "float");
+		assert(null === $value || is_float($value));
 
-		return null !== $value
-			? (float) $value
-			: null;
+		return $value;
 	}
 	// endregion
 
@@ -165,22 +159,50 @@ readonly class ImportData implements \IteratorAggregate, \Countable
 	 */
 	public function getOptionalBoolean (string $path) : ?bool
 	{
-		$value = $this->filter($path, \FILTER_VALIDATE_BOOL, [
-			"flags" => \FILTER_REQUIRE_SCALAR,
-		]);
+		$value = $this->get($path);
 
-		return null !== $value
-			? (bool) $value
-			: null;
+		if (null !== $value && !is_bool($value))
+		{
+			throw new InvalidImportDataException(\sprintf(
+				"Expected bool at path '%s', but got '%s'",
+				$path,
+				get_debug_type($value),
+			));
+		}
+
+		return $value;
 	}
 	// endregion
 
 	/**
 	 * @template EnumClass of \BackedEnum
 	 *
-	 * @param class-string<EnumClass> $class
+	 * @param class-string<EnumClass> $enumClass
+	 * @return EnumClass
 	 */
-	public function getEnum (string $path, string $class) : ?\BackedEnum
+	public function getEnum (string $path, string $enumClass) : ?\BackedEnum
+	{
+		$value = $this->getOptionalEnum($path, $enumClass);
+
+		if (null === $value)
+		{
+			throw new InvalidImportDataException(\sprintf(
+				"Could not fetch value of backed enum of type '%s' at path '%s', as there is no value at this path.",
+				$enumClass,
+				$path,
+			));
+		}
+
+		return $value;
+	}
+
+	/**
+	 * @template EnumClass of \BackedEnum
+	 *
+	 * @param class-string<EnumClass> $enumClass
+	 * @return EnumClass|null
+	 */
+	public function getOptionalEnum (string $path, string $enumClass) : ?\BackedEnum
 	{
 		$value = $this->get($path);
 
@@ -194,14 +216,14 @@ readonly class ImportData implements \IteratorAggregate, \Countable
 			throw new InvalidImportDataException(\sprintf(
 				"Could not use value of type '%s' as value for a backed enum of type '%s' at path '%s'",
 				get_debug_type($value),
-				$class,
+				$enumClass,
 				$path,
 			));
 		}
 
 		try
 		{
-			return $class::from($value);
+			return $enumClass::tryFrom($value);
 		}
 		catch (UnexpectedValueException $exception)
 		{
@@ -209,7 +231,7 @@ readonly class ImportData implements \IteratorAggregate, \Countable
 				message: \sprintf(
 					"Could not parse value '%s' as value for backend enum '%s' at path '%s'",
 					$value,
-					$class,
+					$enumClass,
 					$path,
 				),
 				previous: $exception,
@@ -218,13 +240,13 @@ readonly class ImportData implements \IteratorAggregate, \Countable
 	}
 
 	/**
+	 * @phpstan-param "int"|"float" $expectedType
 	 * @param int   $filter  FILTER_* constant
 	 * @param array $options Flags from FILTER_* constants
 	 */
 	private function filter (
 		string $path,
-		int $filter = \FILTER_DEFAULT,
-		array $options = [],
+		string $expectedType,
 	) : mixed
 	{
 		$value = $this->get($path);
@@ -234,17 +256,32 @@ readonly class ImportData implements \IteratorAggregate, \Countable
 			return null;
 		}
 
-		$options['flags'] ??= 0;
-		$options['flags'] |= \FILTER_NULL_ON_FAILURE;
+		if (!is_int($value) && !is_float($value) && !\is_string($value))
+		{
+			throw new InvalidImportDataException(\sprintf(
+				"Expected %s at path '%s', but got '%s'",
+				$expectedType,
+				$path,
+				get_debug_type($value),
+			));
+		}
+
+		$filter = match ($expectedType)
+		{
+			"int" => \FILTER_VALIDATE_INT,
+			"float" => \FILTER_VALIDATE_FLOAT,
+		};
+
+		$options['flags'] = \FILTER_REQUIRE_SCALAR | \FILTER_NULL_ON_FAILURE;
 		$filtered = filter_var($value, $filter, $options);
 
 		if (null === $filtered)
 		{
 			throw new InvalidImportDataException(\sprintf(
-				"Could not properly filter data of type '%s' with filter type '%d' at path '%s'",
-				get_debug_type($value),
-				$filter,
+				"Expected %s at path '%s', but got '%s'",
+				$expectedType,
 				$path,
+				get_debug_type($value),
 			));
 		}
 
