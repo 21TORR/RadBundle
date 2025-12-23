@@ -2,12 +2,15 @@
 
 namespace Tests\Torr\Rad\Import;
 
+use PHPUnit\Framework\TestCase;
 use Tests\Torr\Rad\Fixtures\ExampleBackedEnum;
 use Torr\Rad\Exception\Import\InvalidImportDataException;
 use Torr\Rad\Import\ImportData;
-use PHPUnit\Framework\TestCase;
 
-class ImportDataTest extends TestCase
+/**
+ * @internal
+ */
+final class ImportDataTest extends TestCase
 {
 	/**
 	 *
@@ -72,7 +75,7 @@ class ImportDataTest extends TestCase
 		self::assertNull($data->getOptionalEnum("null", ExampleBackedEnum::class));
 	}
 
-	public function provideInvalid () : iterable
+	public static function provideInvalid () : iterable
 	{
 		// unparseable: required
 		yield "unparseable int" => [

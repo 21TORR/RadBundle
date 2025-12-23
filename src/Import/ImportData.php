@@ -110,7 +110,7 @@ readonly class ImportData implements \IteratorAggregate, \Countable
 	public function getOptionalInt (string $path) : ?int
 	{
 		$value = $this->filter($path, "int");
-		\assert(null === $value || is_int($value));
+		\assert(null === $value || \is_int($value));
 
 		return $value;
 	}
@@ -135,7 +135,7 @@ readonly class ImportData implements \IteratorAggregate, \Countable
 	public function getOptionalFloat (string $path) : ?float
 	{
 		$value = $this->filter($path, "float");
-		assert(null === $value || is_float($value));
+		\assert(null === $value || \is_float($value));
 
 		return $value;
 	}
@@ -161,7 +161,7 @@ readonly class ImportData implements \IteratorAggregate, \Countable
 	{
 		$value = $this->get($path);
 
-		if (null !== $value && !is_bool($value))
+		if (null !== $value && !\is_bool($value))
 		{
 			throw new InvalidImportDataException(\sprintf(
 				"Expected bool at path '%s', but got '%s'",
@@ -178,6 +178,7 @@ readonly class ImportData implements \IteratorAggregate, \Countable
 	 * @template EnumClass of \BackedEnum
 	 *
 	 * @param class-string<EnumClass> $enumClass
+	 *
 	 * @return EnumClass
 	 */
 	public function getEnum (string $path, string $enumClass) : ?\BackedEnum
@@ -200,6 +201,7 @@ readonly class ImportData implements \IteratorAggregate, \Countable
 	 * @template EnumClass of \BackedEnum
 	 *
 	 * @param class-string<EnumClass> $enumClass
+	 *
 	 * @return EnumClass|null
 	 */
 	public function getOptionalEnum (string $path, string $enumClass) : ?\BackedEnum
@@ -241,8 +243,6 @@ readonly class ImportData implements \IteratorAggregate, \Countable
 
 	/**
 	 * @phpstan-param "int"|"float" $expectedType
-	 * @param int   $filter  FILTER_* constant
-	 * @param array $options Flags from FILTER_* constants
 	 */
 	private function filter (
 		string $path,
@@ -256,7 +256,7 @@ readonly class ImportData implements \IteratorAggregate, \Countable
 			return null;
 		}
 
-		if (!is_int($value) && !is_float($value) && !\is_string($value))
+		if (!\is_int($value) && !\is_float($value) && !\is_string($value))
 		{
 			throw new InvalidImportDataException(\sprintf(
 				"Expected %s at path '%s', but got '%s'",
