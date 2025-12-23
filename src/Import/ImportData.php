@@ -28,6 +28,13 @@ readonly class ImportData implements \IteratorAggregate, \Countable
 	 */
 	public function get (string $path) : mixed
 	{
+		// for simple paths, we automatically wrap it in [...], so that you don't have to write it explicitly.
+		// we only require it for nested paths / complex names
+		if (preg_match('~^[a-z0-9\\-_]+$~', $path))
+		{
+			$path = "[{$path}]";
+		}
+
 		return $this->accessor->getValue($this->data, $path);
 	}
 
