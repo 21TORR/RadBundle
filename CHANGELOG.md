@@ -1,3 +1,9 @@
+3.4.1
+=====
+
+* (improvement) Normalize empty strings in `ImportData` to `null`.
+
+
 3.4.0
 =====
 

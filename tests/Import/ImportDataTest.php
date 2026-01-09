@@ -25,6 +25,7 @@ final class ImportDataTest extends TestCase
 			"bool" => true,
 			"string" => "text",
 			"enum" => "test",
+			"empty-string" => "",
 			"null" => null,
 			"nested" => [
 				"a" => 15,
@@ -49,6 +50,7 @@ final class ImportDataTest extends TestCase
 		self::assertSame("2", $data->getString("int"));
 		self::assertSame("2.5", $data->getString("float"));
 		self::assertSame("1", $data->getString("bool"));
+		self::assertNull($data->getOptionalString("empty-string"));
 
 		// enum
 		self::assertSame(ExampleBackedEnum::Test, $data->getEnum("enum", ExampleBackedEnum::class));
