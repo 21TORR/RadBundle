@@ -72,7 +72,11 @@ readonly class ImportData implements \IteratorAggregate, \Countable
 			));
 		}
 
-		return (string) $value;
+		$result = (string) $value;
+
+		return "" !== $result
+			? $result
+			: null;
 	}
 
 	/**
