@@ -1,3 +1,9 @@
+3.4.2
+=====
+
+* (improvement) Add `EntityModel::refresh()`.
+
+
 3.4.1
 =====
 
