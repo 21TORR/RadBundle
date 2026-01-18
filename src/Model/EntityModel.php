@@ -65,12 +65,20 @@ abstract class EntityModel implements ModelInterface
 	}
 
 	/**
-	 * @inheritDoc
+	 * Flushes all database changes of all entities to the database
 	 */
 	public function flush () : static
 	{
 		$this->entityManager->flush();
 
 		return $this;
+	}
+
+	/**
+	 * Refreshes/resets the given entity: will reset the entity to the values currently stored in the database
+	 */
+	public function refresh (EntityInterface $entity) : void
+	{
+		$this->entityManager->refresh($entity);
 	}
 }
