@@ -26,10 +26,10 @@ abstract class EntityModel implements ModelInterface
 	/**
 	 * @inheritDoc
 	 */
-	public function update (EntityInterface $entity) : static
+	public function update (EntityInterface $entity, bool $markAsModified = true) : static
 	{
 		// automatic integration for entities that use the TimestampsTrait
-		if (method_exists($entity, 'markAsModified'))
+		if ($markAsModified && method_exists($entity, 'markAsModified'))
 		{
 			$entity->markAsModified();
 		}
