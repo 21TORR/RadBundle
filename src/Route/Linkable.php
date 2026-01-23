@@ -19,6 +19,8 @@ final class Linkable implements LinkableInterface
 
 	/**
 	 * The parameters match the ones from {@see UrlGeneratorInterface::generate()}
+	 *
+	 * @param string $route The #Route to link o
 	 */
 	public function __construct (
 		private readonly string $route,
