@@ -1,3 +1,9 @@
+3.4.3
+=====
+
+* (improvement) Add annotation to improve autocompletion.
+
+
 3.4.2
 =====
 
