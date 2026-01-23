@@ -1,3 +1,9 @@
+3.4.4
+=====
+
+* (improvement) Add option to `EntityModel::update()` to skip marking the entity as modified.
+
+
 3.4.3
 =====
 
