@@ -1,3 +1,9 @@
+3.4.6
+=====
+
+* (deprecation) Deprecate `DoctrineChangeChecker`.
+
+
 3.4.5
 =====
 

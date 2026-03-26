@@ -3,6 +3,7 @@
 
 * Passing a `bool` to the constructor of `ApiResponse` was removed, pass a status code instead.
 * The method `ApiResponse::withStatusCode()` was removed. Pass the status code in the constructor instead.
+* `DoctrineChangeChecker` was removed. There is no direct replacement.
 
 
 2.x to 3.0
