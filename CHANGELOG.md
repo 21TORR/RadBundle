@@ -2,6 +2,7 @@
 =====
 
 * (deprecation) Deprecate `DoctrineChangeChecker`.
+* (improvement) Add `ApiResponseNormalizer::createResponse()`.
 
 
 3.4.5
