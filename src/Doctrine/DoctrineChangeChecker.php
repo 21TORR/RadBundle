@@ -6,13 +6,25 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Torr\Rad\Exception\Doctrine\InvalidDoctrineChangeCheckException;
 
+/**
+ * @deprecated this class is deprecated and will be removed in v4
+ */
 final readonly class DoctrineChangeChecker
 {
+	// TODO remove in v4
 	/**
 	 */
 	public function __construct (
 		private ManagerRegistry $managerRegistry,
-	) {}
+	)
+	{
+		trigger_deprecation(
+			"21torr/rad",
+			"3.4.6",
+			"Using %s is deprecated and will be removed in v4.",
+			self::class,
+		);
+	}
 
 	/**
 	 * Determines whether any content globally in any of the entities (or the entities themselves)

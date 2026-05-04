@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\UnitOfWork;
 use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
+use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 use Torr\Rad\Doctrine\DoctrineChangeChecker;
 
 /**
@@ -13,6 +14,8 @@ use Torr\Rad\Doctrine\DoctrineChangeChecker;
  */
 final class DoctrineChangeCheckerTest extends TestCase
 {
+	use ExpectDeprecationTrait;
+
 	/**
 	 *
 	 */
@@ -51,6 +54,8 @@ final class DoctrineChangeCheckerTest extends TestCase
 
 	/**
 	 * @dataProvider provideLargeEntityChanges
+	 *
+	 * @group legacy
 	 */
 	public function testLargeEntityChanges (
 		bool $expected,
@@ -92,7 +97,10 @@ final class DoctrineChangeCheckerTest extends TestCase
 			->method("getManager")
 			->willReturn($entityManager);
 
+		$this->expectDeprecation("Since 21torr/rad 3.4.6: Using Torr\\Rad\\Doctrine\\DoctrineChangeChecker is deprecated and will be removed in v4.");
+		// @phpstan-ignore-next-line
 		$checker = new DoctrineChangeChecker($registry);
+		// @phpstan-ignore-next-line
 		self::assertSame($expected, $checker->hasContentChanged());
 	}
 
@@ -114,6 +122,8 @@ final class DoctrineChangeCheckerTest extends TestCase
 
 	/**
 	 * @dataProvider provideChangesets
+	 *
+	 * @group legacy
 	 */
 	public function testChangesets (
 		bool $expected,
@@ -158,7 +168,10 @@ final class DoctrineChangeCheckerTest extends TestCase
 			->method("getManager")
 			->willReturn($entityManager);
 
+		$this->expectDeprecation("Since 21torr/rad 3.4.6: Using Torr\\Rad\\Doctrine\\DoctrineChangeChecker is deprecated and will be removed in v4.");
+		// @phpstan-ignore-next-line
 		$checker = new DoctrineChangeChecker($registry);
+		// @phpstan-ignore-next-line
 		self::assertSame($expected, $checker->hasContentChanged());
 	}
 }

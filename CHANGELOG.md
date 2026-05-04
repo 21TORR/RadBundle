@@ -1,3 +1,15 @@
+3.4.6
+=====
+
+* (deprecation) Deprecate `DoctrineChangeChecker`.
+
+
+3.4.5
+=====
+
+* (internal) Add tests for `AbilitiesVoter`.
+
+
 3.4.4
 =====
 
