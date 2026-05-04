@@ -2,15 +2,16 @@
 
 namespace Torr\Rad\Api;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class ApiResponseNormalizer
+final readonly class ApiResponseNormalizer
 {
 	/**
 	 */
 	public function __construct (
-		private readonly TranslatorInterface $translator,
+		private TranslatorInterface $translator,
 	) {}
 
 	/**
@@ -30,6 +31,17 @@ final class ApiResponseNormalizer
 					: $apiResponse->errorMessage,
 			],
 			static fn (mixed $value) => null !== $value,
+		);
+	}
+
+	/**
+	 * Creates a Symfony response from the given ApiResponse
+	 */
+	public function createResponse (ApiResponse $apiResponse) : JsonResponse
+	{
+		return new JsonResponse(
+			$this->normalize($apiResponse),
+			$apiResponse->statusCode,
 		);
 	}
 }
