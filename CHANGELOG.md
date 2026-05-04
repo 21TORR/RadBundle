@@ -1,14 +1,9 @@
-3.4.6
-=====
-
-* (deprecation) Deprecate `DoctrineChangeChecker`.
-* (improvement) Add `ApiResponseNormalizer::createResponse()`.
-
-
 3.4.5
 =====
 
 * (internal) Add tests for `AbilitiesVoter`.
+* (deprecation) Deprecate `DoctrineChangeChecker`.
+* (improvement) Add `ApiResponseNormalizer::createResponse()`.
 
 
 3.4.4
