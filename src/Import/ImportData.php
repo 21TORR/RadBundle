@@ -4,7 +4,7 @@ namespace Torr\Rad\Import;
 
 use Symfony\Component\HttpFoundation\Exception\UnexpectedValueException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\PropertyAccess\PropertyAccessor;
+use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Torr\Rad\Exception\Import\InvalidImportDataException;
 
 /**
@@ -14,13 +14,14 @@ use Torr\Rad\Exception\Import\InvalidImportDataException;
  */
 readonly class ImportData implements \IteratorAggregate, \Countable
 {
-	private PropertyAccessor $accessor;
+	private PropertyAccessorInterface $accessor;
 
 	public function __construct (
 		private array $data,
+		?PropertyAccessorInterface $accessor = null,
 	)
 	{
-		$this->accessor = PropertyAccess::createPropertyAccessor();
+		$this->accessor = $accessor ?? PropertyAccess::createPropertyAccessor();
 	}
 
 	/**
@@ -30,7 +31,7 @@ readonly class ImportData implements \IteratorAggregate, \Countable
 	{
 		// for simple paths, we automatically wrap it in [...], so that you don't have to write it explicitly.
 		// we only require it for nested paths / complex names
-		if (preg_match('~^[a-z0-9\\-_]+$~', $path))
+		if (!preg_match('~[\[\].]~', $path))
 		{
 			$path = "[{$path}]";
 		}

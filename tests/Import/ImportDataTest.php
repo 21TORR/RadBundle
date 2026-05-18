@@ -3,6 +3,7 @@
 namespace Tests\Torr\Rad\Import;
 
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Tests\Torr\Rad\Fixtures\ExampleBackedEnum;
 use Torr\Rad\Exception\Import\InvalidImportDataException;
 use Torr\Rad\Import\ImportData;
@@ -203,5 +204,33 @@ final class ImportDataTest extends TestCase
 		]);
 
 		$callback($data);
+	}
+
+	/**
+	 *
+	 */
+	public static function providePathRewrite () : iterable
+	{
+		yield ["abc", "[abc]"];
+		yield ["aBc1_", "[aBc1_]"];
+		yield ["abc def", "[abc def]"];
+		yield ["test.abc", "test.abc"];
+		yield ["[abc]", "[abc]"];
+		yield ["[abc][def]", "[abc][def]"];
+	}
+
+	/**
+	 * @dataProvider providePathRewrite
+	 */
+	public function testPathRewrite (string $input, string $expected) : void
+	{
+		$accessor = self::createMock(PropertyAccessorInterface::class);
+		$accessor
+			->expects(self::once())
+			->method("getValue")
+			->with([], $expected);
+
+		$import = new ImportData([], $accessor);
+		$import->get($input);
 	}
 }
