@@ -1,3 +1,9 @@
+3.4.6
+=====
+
+* (improvement) Made detection of rewritable paths in `ImportData` more robust.
+
+
 3.4.5
 =====
 
