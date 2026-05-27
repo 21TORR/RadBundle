@@ -28,7 +28,7 @@ final class TranslationHelperTest extends TestCase
 
 	public function testResolveReturnsStringAsIsForStringInput () : void
 	{
-		$translator = $this->createStub(TranslatorInterface::class);
+		$translator = self::createStub(TranslatorInterface::class);
 		$helper = new TranslationHelper($translator);
 
 		self::assertSame("already translated", $helper->resolve("already translated", "de"));
@@ -36,11 +36,10 @@ final class TranslationHelperTest extends TestCase
 
 	public function testResolveTranslatesTranslatable () : void
 	{
-		$translator = $this->createStub(TranslatorInterface::class);
+		$translator = self::createStub(TranslatorInterface::class);
 		$helper = new TranslationHelper($translator);
 
-		$translatable = new class() implements TranslatableInterface
-		{
+		$translatable = new class() implements TranslatableInterface {
 			public ?TranslatorInterface $receivedTranslator = null;
 			public ?string $receivedLocale = null;
 
@@ -60,7 +59,7 @@ final class TranslationHelperTest extends TestCase
 
 	public function testResolveReturnsNullForNull () : void
 	{
-		$translator = $this->createStub(TranslatorInterface::class);
+		$translator = self::createStub(TranslatorInterface::class);
 		$helper = new TranslationHelper($translator);
 
 		self::assertNull($helper->resolve(null, "de"));
@@ -68,11 +67,10 @@ final class TranslationHelperTest extends TestCase
 
 	public function testResolveTranslatableUsesNullLocaleByDefault () : void
 	{
-		$translator = $this->createStub(TranslatorInterface::class);
+		$translator = self::createStub(TranslatorInterface::class);
 		$helper = new TranslationHelper($translator);
 
-		$translatable = new class() implements TranslatableInterface
-		{
+		$translatable = new class() implements TranslatableInterface {
 			public ?string $receivedLocale = "initial";
 
 			public function trans (TranslatorInterface $translator, ?string $locale = null) : string
@@ -86,4 +84,28 @@ final class TranslationHelperTest extends TestCase
 		self::assertSame("translated without explicit locale", $helper->resolve($translatable));
 		self::assertNull($translatable->receivedLocale);
 	}
+
+	/**
+	 * Runtime assertion plus static type check for PHPStan:
+	 * `resolve("...")` must be inferred as `string`, and `resolve(null)` as `null`.
+	 */
+	public function testResolveConditionalReturnTypeForPhpStan () : void
+	{
+		$translator = self::createStub(TranslatorInterface::class);
+		$helper = new TranslationHelper($translator);
+
+		$stringResult = $helper->resolve("value");
+		$nullResult = $helper->resolve(null);
+
+		self::assertSame("value", $stringResult);
+		self::assertNull($nullResult);
+
+		// These calls are the actual PHPStan checks for the conditional return type.
+		self::expectString($stringResult);
+		self::expectNull($nullResult);
+	}
+
+	private static function expectString (string $value) : void {}
+
+	private static function expectNull (null $value) : void {}
 }

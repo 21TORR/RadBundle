@@ -7,6 +7,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @final
+ *
  * @api
  *
  * Translator helper that solves typical translation workflows
@@ -22,7 +23,7 @@ readonly class TranslationHelper
 	/**
 	 * Regular translator, like {@see TranslatorInterface::trans()}
 	 */
-	public function trans (string $id, array $parameters = [], ?string $domain = null, ?string $locale = null): string
+	public function trans (string $id, array $parameters = [], ?string $domain = null, ?string $locale = null) : string
 	{
 		return $this->translator->trans($id, $parameters, $domain, $locale);
 	}
