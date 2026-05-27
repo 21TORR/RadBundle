@@ -3,7 +3,7 @@
 namespace Torr\Rad\Api;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Translation\TranslatableMessage;
+use Symfony\Contracts\Translation\TranslatableInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final readonly class ApiResponseNormalizer
@@ -26,7 +26,7 @@ final readonly class ApiResponseNormalizer
 				"ok" => $apiResponse->isOk(),
 				"data" => $apiResponse->data,
 				"error" => $apiResponse->error,
-				"errorMessage" => $apiResponse->errorMessage instanceof TranslatableMessage
+				"errorMessage" => $apiResponse->errorMessage instanceof TranslatableInterface
 					? $apiResponse->errorMessage->trans($this->translator)
 					: $apiResponse->errorMessage,
 			],

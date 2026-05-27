@@ -2,13 +2,13 @@
 
 namespace Torr\Rad\Api;
 
-use Symfony\Component\Translation\TranslatableMessage;
+use Symfony\Contracts\Translation\TranslatableInterface;
 
 class ApiResponse
 {
 	public int $statusCode;
 	public ?string $error = null;
-	public TranslatableMessage|string|null $errorMessage = null;
+	public TranslatableInterface|string|null $errorMessage = null;
 
 	/**
 	 */
@@ -58,7 +58,7 @@ class ApiResponse
 	 */
 	public function withError (
 		?string $error,
-		TranslatableMessage|string|null $errorMessage = null,
+		TranslatableInterface|string|null $errorMessage = null,
 	) : self
 	{
 		$this->error = $error;

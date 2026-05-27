@@ -1,3 +1,9 @@
+3.4.7
+=====
+
+* (improvement) Allow `TranslatableInterface` instead of only `TranslatableMessage` everywhere.
+
+
 3.4.6
 =====
 
