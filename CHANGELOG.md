@@ -1,3 +1,10 @@
+3.5.0
+=====
+
+* (feature) Add `TranslationHelper`.
+* (improvement) Allow `TranslatableInterface` instead of only `TranslatableMessage` everywhere.
+
+
 3.4.6
 =====
 
