@@ -146,6 +146,72 @@ readonly class ImportData implements \IteratorAggregate, \Countable
 	}
 	// endregion
 
+	// region Number
+	/**
+	 *
+	 */
+	public function getNumber (string $path) : int|float
+	{
+		return $this->filterOutNull(
+			$this->getOptionalNumber($path),
+			"number",
+			$path,
+		);
+	}
+
+	/**
+	 *
+	 */
+	public function getOptionalNumber (string $path) : int|float|null
+	{
+		$value = $this->get($path);
+
+		if (null === $value)
+		{
+			return null;
+		}
+
+		if (\is_int($value) || \is_float($value))
+		{
+			return $value;
+		}
+
+		if (!\is_string($value))
+		{
+			throw new InvalidImportDataException(\sprintf(
+				"Expected number at path '%s', but got '%s'",
+				$path,
+				get_debug_type($value),
+			));
+		}
+
+		$options['flags'] = \FILTER_REQUIRE_SCALAR | \FILTER_NULL_ON_FAILURE;
+		$intValue = filter_var($value, \FILTER_VALIDATE_INT, $options);
+
+		if (null !== $intValue)
+		{
+			\assert(\is_int($intValue));
+
+			return $intValue;
+		}
+
+		$floatValue = filter_var($value, \FILTER_VALIDATE_FLOAT, $options);
+
+		if (null === $floatValue)
+		{
+			throw new InvalidImportDataException(\sprintf(
+				"Expected number at path '%s', but got '%s'",
+				$path,
+				get_debug_type($value),
+			));
+		}
+
+		\assert(\is_float($floatValue));
+
+		return $floatValue;
+	}
+	// endregion
+
 	// region Boolean
 	/**
 	 *
@@ -179,6 +245,7 @@ readonly class ImportData implements \IteratorAggregate, \Countable
 	}
 	// endregion
 
+	// region Enum
 	/**
 	 * @template EnumClass of \BackedEnum
 	 *
@@ -245,6 +312,40 @@ readonly class ImportData implements \IteratorAggregate, \Countable
 			);
 		}
 	}
+	// endregion
+
+	// region Array
+	/**
+	 *
+	 */
+	public function getArray (string $path) : array
+	{
+		return $this->filterOutNull(
+			$this->getOptionalArray($path),
+			"array",
+			$path,
+		);
+	}
+
+	/**
+	 *
+	 */
+	public function getOptionalArray (string $path) : ?array
+	{
+		$value = $this->get($path);
+
+		if (null !== $value && !\is_array($value))
+		{
+			throw new InvalidImportDataException(\sprintf(
+				"Expected array at path '%s', but got '%s'",
+				$path,
+				get_debug_type($value),
+			));
+		}
+
+		return $value;
+	}
+	// endregion
 
 	/**
 	 * @phpstan-param "int"|"float" $expectedType

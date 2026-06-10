@@ -1,3 +1,10 @@
+3.6.0
+=====
+
+* (feature) Add `ImportData::getNumber()`.
+* (feature) Add `ImportData::getArray()`.
+
+
 3.5.0
 =====
 

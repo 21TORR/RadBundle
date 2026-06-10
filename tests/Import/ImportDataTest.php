@@ -26,6 +26,7 @@ final class ImportDataTest extends TestCase
 			"bool" => true,
 			"string" => "text",
 			"enum" => "test",
+			"array" => ["a" => 15],
 			"empty-string" => "",
 			"null" => null,
 			"nested" => [
@@ -57,6 +58,10 @@ final class ImportDataTest extends TestCase
 		self::assertSame(ExampleBackedEnum::Test, $data->getEnum("enum", ExampleBackedEnum::class));
 		self::assertSame(ExampleBackedEnum::Test, $data->getOptionalEnum("enum", ExampleBackedEnum::class));
 
+		// array
+		self::assertSame(["a" => 15], $data->getArray("array"));
+		self::assertSame(["a" => 15], $data->getOptionalArray("array"));
+
 		// nested
 		self::assertSame(15, $data->getInt("[nested][a]"));
 
@@ -71,11 +76,13 @@ final class ImportDataTest extends TestCase
 		self::assertNull($data->getOptionalFloat("missing"));
 		self::assertNull($data->getOptionalBoolean("missing"));
 		self::assertNull($data->getOptionalEnum("missing", ExampleBackedEnum::class));
+		self::assertNull($data->getOptionalArray("missing"));
 		self::assertNull($data->getOptionalString("null"));
 		self::assertNull($data->getOptionalInt("null"));
 		self::assertNull($data->getOptionalFloat("null"));
 		self::assertNull($data->getOptionalBoolean("null"));
 		self::assertNull($data->getOptionalEnum("null", ExampleBackedEnum::class));
+		self::assertNull($data->getOptionalArray("null"));
 	}
 
 	public static function provideInvalid () : iterable
@@ -127,6 +134,11 @@ final class ImportDataTest extends TestCase
 			"Expected string at path 'nested', but got 'array'",
 		];
 
+		yield "unparseable optional array" => [
+			static fn (ImportData $data) => $data->getOptionalArray("string"),
+			"Expected array at path 'string', but got 'string'",
+		];
+
 		// missing fields
 		yield "missing string" => [
 			static fn (ImportData $data) => $data->getString("missing"),
@@ -146,6 +158,11 @@ final class ImportDataTest extends TestCase
 		yield "missing bool" => [
 			static fn (ImportData $data) => $data->getBoolean("missing"),
 			"Expected bool at path 'missing', but got 'null'",
+		];
+
+		yield "missing array" => [
+			static fn (ImportData $data) => $data->getArray("missing"),
+			"Expected array at path 'missing', but got 'null'",
 		];
 
 		yield "missing enum" => [
@@ -173,6 +190,11 @@ final class ImportDataTest extends TestCase
 			"Expected bool at path 'null', but got 'null'",
 		];
 
+		yield "explicit null as array" => [
+			static fn (ImportData $data) => $data->getArray("null"),
+			"Expected array at path 'null', but got 'null'",
+		];
+
 		yield "explicit null as enum" => [
 			static fn (ImportData $data) => $data->getEnum("null", ExampleBackedEnum::class),
 			"Could not fetch value of backed enum of type 'Tests\Torr\Rad\Fixtures\ExampleBackedEnum' at path 'null', as there is no value at this path.",
@@ -197,6 +219,7 @@ final class ImportDataTest extends TestCase
 			"float-text" => "3.5",
 			"bool" => true,
 			"string" => "text",
+			"array" => ["a" => 15],
 			"null" => null,
 			"nested" => [
 				"a" => 15,
